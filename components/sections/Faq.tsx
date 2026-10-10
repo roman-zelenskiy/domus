@@ -17,13 +17,13 @@ export function Faq() {
       <div className="container-x grid gap-14 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
-            <SectionLabel index="09">Вопросы</SectionLabel>
-            <RevealText as="h2" text={"Частые\n*вопросы*"} className="h2 mt-8" />
+            <SectionLabel index="09">Питання</SectionLabel>
+            <RevealText as="h2" text={"Часті\n*питання*"} className="h2 mt-8" />
             <Reveal delay={0.15}>
               <div className="mt-10 max-w-sm rounded-[1.75rem] border border-graphite/10 bg-paper p-7">
-                <p className="font-serif text-2xl leading-tight">Не нашли ответ?</p>
+                <p className="font-serif text-2xl leading-tight">Не знайшли відповіді?</p>
                 <p className="mt-2 text-sm leading-relaxed text-stone">
-                  Напишите менеджеру — отвечаем в течение 15 минут, {company.hours.toLowerCase()}.
+                  Напишіть менеджеру — відповідаємо протягом 15 хвилин, {company.hours.toLowerCase()}.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   <a href={company.messengers.telegram} className="inline-flex items-center gap-2 rounded-full bg-graphite px-4 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-terracotta">
@@ -52,7 +52,12 @@ export function Faq() {
                     onClick={() => setOpen(isOpen ? null : i)}
                     className="group flex w-full items-start gap-6 py-7 text-left md:py-8"
                   >
-                    <span className="mt-2 font-mono text-xs text-terracotta">0{i + 1}</span>
+                    {/* номер — псевдоэлементом, чтобы не попадал в текст заголовка */}
+                    <span
+                      aria-hidden
+                      data-n={`0${i + 1}`}
+                      className="mt-2 font-mono text-xs text-terracotta before:content-[attr(data-n)]"
+                    />
                     <span className="flex-1 font-serif text-[1.65rem] leading-[1.1] transition-colors group-hover:text-terracotta md:text-[2rem]">
                       {item.q}
                     </span>

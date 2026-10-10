@@ -47,11 +47,11 @@ export function Header() {
               aria-hidden
               className={`glass absolute inset-0 -z-10 rounded-full transition-opacity duration-700 ${scrolled || menu ? "opacity-100" : "opacity-0"}`}
             />
-            <a href="#top" aria-label="Domus — на главную" className="relative">
+            <a href="#top" aria-label="Domus — на головну" className="relative">
               <Logo />
             </a>
 
-            <nav aria-label="Основная навигация" className="hidden lg:block">
+            <nav aria-label="Основна навігація" className="hidden lg:block">
               <ul className="flex items-center gap-1">
                 {nav.map((item) => (
                   <li key={item.href}>
@@ -79,14 +79,14 @@ export function Header() {
                 {company.phone}
               </a>
               <div className="hidden sm:block">
-                <Button onClick={() => open("header")}>Замер бесплатно</Button>
+                <Button onClick={() => open("header")}>Замір безкоштовно</Button>
               </div>
               <button
                 type="button"
                 onClick={() => setMenu((m) => !m)}
                 aria-expanded={menu}
                 aria-controls="mobile-menu"
-                aria-label={menu ? "Закрыть меню" : "Открыть меню"}
+                aria-label={menu ? "Закрити меню" : "Відкрити меню"}
                 className="relative grid h-12 w-12 place-items-center rounded-full bg-graphite text-paper lg:hidden"
               >
                 <span className="relative block h-3 w-5">
@@ -110,7 +110,7 @@ export function Header() {
             data-lenis-prevent
           >
             <div className="blueprint-grid pointer-events-none absolute inset-0 opacity-60" />
-            <nav aria-label="Мобильная навигация" className="relative flex-1">
+            <nav aria-label="Мобільна навігація" className="relative flex-1">
               <ul className="space-y-1">
                 {nav.map((item, i) => (
                   <li key={item.href} className="overflow-hidden">
@@ -158,7 +158,7 @@ export function Header() {
                 size="lg"
                 magnetic={false}
               >
-                Записаться на бесплатный замер
+                Записатися на безкоштовний замір
               </Button>
             </motion.div>
           </motion.div>

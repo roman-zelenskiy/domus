@@ -5,9 +5,9 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const perks = [
-  ["40 минут", "Лазерный обмер, проверка стен, полов и коммуникаций"],
-  ["3 дня", "Смета на 200+ позиций и график работ по дням"],
-  ["0 ₴", "Замер бесплатный и ни к чему не обязывает"],
+  ["40 хвилин", "Лазерний обмір, перевірка стін, підлоги та комунікацій"],
+  ["3 дні", "Кошторис на 200+ позицій і графік робіт по днях"],
+  ["0 ₴", "Замір безкоштовний і ні до чого не зобов’язує"],
 ];
 
 export function FinalCta() {
@@ -24,7 +24,7 @@ export function FinalCta() {
           </SectionLabel>
           <RevealText
             as="h2"
-            text={"Бесплатный замер\nи смета, которая\n*не изменится*"}
+            text={"Безкоштовний\nзамір і кошторис,\nякий *не зміниться*"}
             className="h2 mt-8"
           />
 
@@ -39,8 +39,8 @@ export function FinalCta() {
 
           <Reveal delay={0.2}>
             <p className="mt-10 text-cream/60">
-              Удобнее позвонить?{" "}
-              <a href={company.phoneHref} className="font-mono text-cream underline decoration-terracotta-light underline-offset-4 hover:text-terracotta-light">
+              Зручніше зателефонувати?{" "}
+              <a href={company.phoneHref} className="font-mono whitespace-nowrap text-cream underline decoration-terracotta-light underline-offset-4 hover:text-terracotta-light">
                 {company.phone}
               </a>
             </p>
@@ -49,8 +49,8 @@ export function FinalCta() {
 
         <Reveal className="lg:col-span-5 lg:col-start-8" delay={0.1}>
           <div className="glass-dark rounded-[2rem] p-6 sm:p-10">
-            <p className="font-serif text-3xl leading-tight">Запишитесь на замер</p>
-            <p className="mt-2 text-sm text-cream/60">Перезвоним в течение 15 минут и подберём время.</p>
+            <p className="font-serif text-3xl leading-tight">Запишіться на замір</p>
+            <p className="mt-2 text-sm text-cream/60">Передзвонимо протягом 15 хвилин і підберемо час.</p>
             <div className="mt-10">
               <LeadForm tone="dark" source="final-cta" />
             </div>

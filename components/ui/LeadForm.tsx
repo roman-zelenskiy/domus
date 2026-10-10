@@ -14,10 +14,10 @@ type Errors = Partial<Record<"name" | "phone", string>>;
 
 function validate(name: string, phone: string): Errors {
   const errors: Errors = {};
-  if (name.trim().length < 2) errors.name = "Как к вам обращаться? Минимум 2 буквы";
-  else if (!/^[\p{L}\s'’-]+$/u.test(name.trim())) errors.name = "Только буквы, пожалуйста";
-  if (!phone) errors.phone = "Укажите номер, чтобы мы могли перезвонить";
-  else if (!isValidPhone(phone)) errors.phone = "Номер неполный: +380 (XX) XXX-XX-XX";
+  if (name.trim().length < 2) errors.name = "Як до вас звертатися? Мінімум 2 літери";
+  else if (!/^[\p{L}\s'’-]+$/u.test(name.trim())) errors.name = "Лише літери, будь ласка";
+  if (!phone) errors.phone = "Вкажіть номер, щоб ми могли передзвонити";
+  else if (!isValidPhone(phone)) errors.phone = "Номер неповний: +380 (XX) XXX-XX-XX";
   return errors;
 }
 
@@ -57,7 +57,7 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
     setStatus("idle");
   };
 
-  const label = `eyebrow block mb-3 ${dark ? "text-cream/55" : "text-stone"}`;
+  const label = `eyebrow block mb-3 ${dark ? "text-cream/60" : "text-stone"}`;
   const input = `w-full border-b bg-transparent pb-3 font-serif text-[1.75rem] leading-tight outline-none transition-colors duration-300 placeholder:opacity-35 focus-visible:outline-none ${
     dark ? "border-cream/20 text-cream focus:border-terracotta-light" : "border-graphite/20 text-graphite focus:border-terracotta"
   }`;
@@ -90,13 +90,13 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
               />
             </svg>
             <p className="mt-6 font-serif text-4xl leading-tight">
-              Спасибо, {name.trim().split(" ")[0]}!
+              Дякуємо, {name.trim().split(" ")[0]}!
             </p>
             <p className={`mx-auto mt-3 max-w-sm ${dark ? "text-cream/70" : "text-stone"}`}>
-              Инженер перезвонит в течение 15 минут в рабочее время, чтобы договориться о замере.
+              Інженер передзвонить протягом 15 хвилин у робочий час, щоб домовитися про замір.
             </p>
             <button type="button" onClick={reset} className={`eyebrow mt-8 underline underline-offset-4 ${dark ? "text-cream/60" : "text-stone"}`}>
-              Отправить ещё одну заявку
+              Надіслати ще одну заявку
             </button>
           </motion.div>
         ) : (
@@ -112,19 +112,19 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
           >
             {previous && (
               <p className={`rounded-2xl px-4 py-3 text-sm ${dark ? "bg-cream/5 text-cream/70" : "bg-sand/60 text-stone"}`}>
-                {previous.name}, вы уже оставляли заявку{" "}
-                {new Date(previous.createdAt).toLocaleDateString("ru-RU", { day: "numeric", month: "long" })}. Если
-                что-то изменилось — отправьте ещё одну.
+                {previous.name}, ви вже залишали заявку{" "}
+                {new Date(previous.createdAt).toLocaleDateString("uk-UA", { day: "numeric", month: "long" })}. Якщо
+                щось змінилося — надішліть ще одну.
               </p>
             )}
 
             <div>
-              <label htmlFor={`${uid}-name`} className={label}>Ваше имя</label>
+              <label htmlFor={`${uid}-name`} className={label}>Ваше ім’я</label>
               <input
                 id={`${uid}-name`}
                 name="name"
                 autoComplete="given-name"
-                placeholder="Анна"
+                placeholder="Ганна"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 onBlur={() => setTouched((t) => ({ ...t, name: true }))}
@@ -159,7 +159,7 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
             </div>
 
             <fieldset>
-              <legend className={label}>Когда удобно созвониться</legend>
+              <legend className={label}>Коли зручно зателефонувати</legend>
               <div className="flex flex-wrap gap-2">
                 {contactTimes.map((t) => {
                   const active = t === time;
@@ -186,12 +186,12 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
                   {status === "loading" && (
                     <span aria-hidden className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent" />
                   )}
-                  {status === "loading" ? "Отправляем…" : "Записаться на замер"}
+                  {status === "loading" ? "Надсилаємо…" : "Записатися на замір"}
                 </span>
               </Button>
-              <p className={`max-w-[16rem] text-xs leading-relaxed ${dark ? "text-cream/50" : "text-stone"}`}>
-                Нажимая кнопку, вы соглашаетесь с{" "}
-                <Link href="/privacy" className="underline underline-offset-2">политикой конфиденциальности</Link>
+              <p className={`max-w-[16rem] text-xs leading-relaxed ${dark ? "text-cream/60" : "text-stone"}`}>
+                Натискаючи кнопку, ви погоджуєтеся з{" "}
+                <Link href="/privacy" className="underline underline-offset-2">політикою конфіденційності</Link>
               </p>
             </div>
 

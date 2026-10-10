@@ -1,7 +1,7 @@
 /** Стилизованная карта района вокруг офиса (Голосеевский р-н, у НСК «Олимпийский») */
 export function DistrictMap({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 400 280" className={className} role="img" aria-label="Схема проезда: офис Domus на улице Антоновича, 48, рядом с метро Олимпийская">
+    <svg viewBox="0 0 400 280" className={className} role="img" aria-label="Схема проїзду: офіс Domus на вулиці Антоновича, 48, поруч із метро Олімпійська">
       <defs>
         <pattern id="map-park" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <line x1="0" y1="0" x2="0" y2="6" stroke="#8fa070" strokeOpacity=".35" strokeWidth="1.2" />
@@ -34,10 +34,10 @@ export function DistrictMap({ className = "" }: { className?: string }) {
 
       {/* подписи улиц */}
       <g className="font-mono" fill="#f3eee5" fillOpacity=".5" fontSize="8" letterSpacing=".08em">
-        <text x="14" y="110">УЛ. АНТОНОВИЧА</text>
-        <text x="236" y="40" transform="rotate(90 236 40)">УЛ. Б. ВАСИЛЬКОВСКАЯ</text>
-        <text x="258" y="216" fillOpacity=".4">НСК «ОЛИМПИЙСКИЙ»</text>
-        <text x="20" y="248" transform="rotate(-5 20 248)" fillOpacity=".35">УЛ. ЖИЛЯНСКАЯ</text>
+        <text x="14" y="110">ВУЛ. АНТОНОВИЧА</text>
+        <text x="236" y="40" transform="rotate(90 236 40)">ВУЛ. В. ВАСИЛЬКІВСЬКА</text>
+        <text x="258" y="216" fillOpacity=".4">НСК «ОЛІМПІЙСЬКИЙ»</text>
+        <text x="20" y="248" transform="rotate(-5 20 248)" fillOpacity=".35">ВУЛ. ЖИЛЯНСЬКА</text>
       </g>
 
       {/* метро */}
@@ -45,14 +45,14 @@ export function DistrictMap({ className = "" }: { className?: string }) {
         <circle r="9" fill="#2f6e4f" />
         <text y="3.5" textAnchor="middle" fontSize="10" fontWeight="700" fill="#fff" className="font-sans">M</text>
       </g>
-      <text x="258" y="96" className="font-mono" fontSize="7.5" fill="#f3eee5" fillOpacity=".55">ОЛИМПИЙСКАЯ</text>
+      <text x="258" y="96" className="font-mono" fontSize="7.5" fill="#f3eee5" fillOpacity=".55">ОЛІМПІЙСЬКА</text>
 
       {/* офис */}
       <g transform="translate(178 116)">
         <circle r="10" fill="#d88b69" className="origin-center animate-pin-pulse [transform-box:fill-box]" />
         <circle r="7" fill="#d88b69" stroke="#22201d" strokeWidth="2.5" />
         <rect x="-44" y="-40" width="88" height="22" rx="11" fill="#f3eee5" />
-        <text y="-25.5" textAnchor="middle" fontSize="9" fontWeight="600" fill="#22201d" className="font-sans">Domus · офис 12</text>
+        <text y="-25.5" textAnchor="middle" fontSize="9" fontWeight="600" fill="#22201d" className="font-sans">Domus · офіс 12</text>
       </g>
     </svg>
   );

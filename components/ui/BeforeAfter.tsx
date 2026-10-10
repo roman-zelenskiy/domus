@@ -74,7 +74,7 @@ export function BeforeAfter({ before, after, beforeAlt, afterAlt, className = ""
       onPointerMove={(e) => dragging.current && setFromClient(e.clientX)}
       onPointerUp={() => (dragging.current = false)}
       onPointerCancel={() => (dragging.current = false)}
-      data-cursor="Тянуть"
+      data-cursor="Тягніть"
     >
       <Image src={after} alt={afterAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="pointer-events-none object-cover" />
 
@@ -84,7 +84,7 @@ export function BeforeAfter({ before, after, beforeAlt, afterAlt, className = ""
         </motion.div>
         <span className="eyebrow glass absolute top-5 left-5 rounded-full px-3 py-1.5 text-[10px] text-graphite">До</span>
       </motion.div>
-      <span className="eyebrow glass absolute top-5 right-5 rounded-full px-3 py-1.5 text-[10px] text-graphite">После</span>
+      <span className="eyebrow glass absolute top-5 right-5 rounded-full px-3 py-1.5 text-[10px] text-graphite">Після</span>
 
       {/* Ручка-уровень: прикреплена к правому краю слоя «до» */}
       <motion.div className="pointer-events-none absolute inset-0" style={{ x: outerX }}>
@@ -93,11 +93,11 @@ export function BeforeAfter({ before, after, beforeAlt, afterAlt, className = ""
           ref={slider}
           role="slider"
           tabIndex={0}
-          aria-label="Сравнение до и после ремонта"
+          aria-label="Порівняння до та після ремонту"
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={50}
-          aria-valuetext="Перетащите, чтобы сравнить"
+          aria-valuetext="Перетягніть, щоб порівняти"
           onKeyDown={onKey}
           className="pointer-events-auto absolute top-1/2 right-0 flex h-16 w-16 translate-x-1/2 -translate-y-1/2 cursor-grab items-center justify-center rounded-full border border-white/60 bg-paper/80 shadow-xl backdrop-blur-md active:cursor-grabbing"
         >

@@ -89,12 +89,12 @@ export function Portfolio() {
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <SectionLabel index="05">Портфолио</SectionLabel>
-            <RevealText as="h2" text={"Квартиры, в которые\n*хочется* возвращаться"} className="h2 mt-8" />
+            <RevealText as="h2" text={"Квартири, у які\n*хочеться* повертатися"} className="h2 mt-8" />
           </div>
           <Reveal className="lg:col-span-4" delay={0.15}>
             <p className="text-lg leading-relaxed text-stone">
-              350+ объектов за 8 лет. Здесь — шесть, которыми мы особенно гордимся: от однушки под сдачу до
-              сталинки на Печерске.
+              350+ об’єктів за 8 років. Тут — шість, якими ми особливо пишаємося: від однокімнатної під оренду до
+              сталінки на Печерську.
             </p>
           </Reveal>
         </div>
@@ -106,7 +106,7 @@ export function Portfolio() {
           data-lenis-prevent-touch
         >
           {projects.map((p, i) => (
-            <article key={p.title} className="w-[82vw] shrink-0 snap-start sm:w-[58vw] lg:w-[40vw] xl:w-[36vw]" data-cursor="Смотреть">
+            <article key={p.title} className="w-[82vw] shrink-0 snap-start sm:w-[58vw] lg:w-[40vw] xl:w-[36vw]" data-cursor="Дивитися">
               <div className="group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-sand lg:aspect-auto lg:h-[58svh]">
                 <div className="pf-img absolute inset-y-0 -left-[9%] w-[118%]">
                   <Image
@@ -122,12 +122,12 @@ export function Portfolio() {
                 <span className="glass absolute top-4 right-4 rounded-full px-3 py-1.5 font-mono text-[11px] text-graphite">№ 0{i + 1}</span>
                 <dl className="absolute inset-x-4 bottom-4 grid grid-cols-3 gap-2 text-paper">
                   {[
-                    ["Площадь", `${p.area} м²`],
-                    ["Срок", `${p.days} дн.`],
+                    ["Площа", `${p.area} м²`],
+                    ["Термін", `${p.days} дн.`],
                     ["Бюджет", p.budget],
                   ].map(([k, v]) => (
                     <div key={k} className="rounded-xl bg-graphite/35 p-3 backdrop-blur-md">
-                      <dt className="eyebrow text-[9px] text-paper/60">{k}</dt>
+                      <dt className="eyebrow text-[9px] text-paper/75">{k}</dt>
                       <dd className="mt-1 font-serif text-xl leading-none">{v}</dd>
                     </div>
                   ))}
@@ -141,11 +141,11 @@ export function Portfolio() {
           <div className="flex w-[82vw] shrink-0 snap-start flex-col justify-center rounded-[1.75rem] border border-dashed border-graphite/25 p-8 sm:w-[58vw] lg:h-[58svh] lg:w-[30vw]">
             <p className="eyebrow text-terracotta">№ 07</p>
             <p className="mt-5 font-serif text-[2.6rem] leading-[0.98]">
-              Ваша квартира может быть <span className="accent">следующей</span>
+              Ваша квартира може бути <span className="accent">наступною</span>
             </p>
-            <p className="mt-4 max-w-xs text-stone">Покажем ещё 20+ объектов в вашем районе на встрече после замера.</p>
+            <p className="mt-4 max-w-xs text-stone">Покажемо ще 20+ об’єктів у вашому районі на зустрічі після заміру.</p>
             <div className="mt-8">
-              <Button onClick={() => open("portfolio")}>Обсудить проект</Button>
+              <Button onClick={() => open("portfolio")}>Обговорити проєкт</Button>
             </div>
           </div>
         </div>
@@ -169,7 +169,7 @@ export function Portfolio() {
                 </svg>
               </div>
             </div>
-            <p className="font-mono text-xs text-stone">листайте →</p>
+            <p className="font-mono text-xs text-stone">гортайте →</p>
           </div>
         </div>
       </div>
@@ -177,12 +177,12 @@ export function Portfolio() {
       {/* До / после */}
       <div className="container-x grid gap-10 py-28 md:py-36 lg:grid-cols-12 lg:items-center">
         <div className="lg:col-span-4">
-          <p className="eyebrow text-terracotta">До / После</p>
+          <p className="eyebrow text-terracotta">До / Після</p>
           <h3 className="mt-6 font-serif text-[2.8rem] leading-[0.95] md:text-6xl">{beforeAfter.title}</h3>
           <p className="mt-5 font-mono text-xs leading-relaxed text-stone">{beforeAfter.meta}</p>
           <p className="mt-6 max-w-sm leading-relaxed text-stone">
-            Потяните шторку: слева — квартира в день замера, справа — в день сдачи. Стены, проводка, полы и
-            перепланировка — за 118 дней по фиксированной смете.
+            Потягніть шторку: ліворуч — квартира в день заміру, праворуч — у день здачі. Стіни, проводка, підлога й
+            перепланування — за 118 днів за фіксованим кошторисом.
           </p>
         </div>
         <Reveal className="lg:col-span-8">

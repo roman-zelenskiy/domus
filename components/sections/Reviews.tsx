@@ -11,7 +11,7 @@ function ReviewCard({ r }: { r: Review }) {
   return (
     <figure className="flex w-[300px] shrink-0 flex-col justify-between rounded-[1.75rem] border border-graphite/10 bg-paper p-7 sm:w-[400px] md:p-8">
       <div>
-        <div className="flex gap-0.5 text-terracotta" aria-label="Оценка 5 из 5">
+        <div className="flex gap-0.5 text-terracotta" role="img" aria-label="Оцінка 5 з 5">
           {Array.from({ length: 5 }, (_, i) => <Star key={i} width={15} height={15} />)}
         </div>
         <blockquote className="mt-5 font-serif text-[1.45rem] leading-[1.25] text-graphite">«{r.text}»</blockquote>
@@ -51,17 +51,17 @@ export function Reviews() {
     <section id="reviews" aria-labelledby="reviews-title" className="relative overflow-hidden bg-sand/45 py-28 md:py-40">
       <div className="container-x grid gap-10 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-8">
-          <SectionLabel index="07">Отзывы</SectionLabel>
-          <RevealText as="h2" text={"Нам *доверили* ключи\nбольше 350 семей"} className="h2 mt-8" />
+          <SectionLabel index="07">Відгуки</SectionLabel>
+          <RevealText as="h2" text={"Нам *довірили* ключі\nпонад 350 родин"} className="h2 mt-8" />
         </div>
         <Reveal className="lg:col-span-4" delay={0.15}>
           <div className="flex items-center gap-5">
             <p className="font-serif text-7xl leading-none">4,9</p>
             <div>
-              <div className="flex text-terracotta">
+              <div className="flex text-terracotta" role="img" aria-label="5 зірок">
                 {Array.from({ length: 5 }, (_, i) => <Star key={i} width={16} height={16} />)}
               </div>
-              <p className="mt-2 text-sm text-stone">212 отзывов в Google Maps</p>
+              <p className="mt-2 text-sm text-stone">212 відгуків у Google Maps</p>
             </div>
           </div>
         </Reveal>

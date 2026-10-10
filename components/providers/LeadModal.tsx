@@ -100,18 +100,18 @@ function Dialog({ source, onClose }: { source: string; onClose: () => void }) {
         <button
           type="button"
           onClick={onClose}
-          aria-label="Закрыть"
+          aria-label="Закрити"
           className="absolute top-4 right-4 grid h-11 w-11 place-items-center rounded-full border border-graphite/15 transition-colors hover:bg-graphite hover:text-paper"
         >
           <Close />
         </button>
         <div className="relative">
-          <p className="eyebrow text-terracotta">Бесплатно · 40 минут · без обязательств</p>
+          <p className="eyebrow text-terracotta">Безкоштовно · 40 хвилин · без зобов’язань</p>
           <h2 id="lead-modal-title" className="mt-4 font-serif text-[2.6rem] leading-[0.95] tracking-[-0.02em] sm:text-5xl">
-            Запишитесь на <span className="accent">замер</span>
+            Запишіться на <span className="accent">замір</span>
           </h2>
           <p className="mt-4 max-w-md text-stone">
-            Инженер приедет с лазерным дальномером, осмотрит коммуникации и через 3 дня пришлёт смету, которая не изменится.
+            Інженер приїде з лазерним далекоміром, огляне комунікації та через 3 дні надішле кошторис, який не зміниться.
           </p>
           <div className="mt-8">
             <LeadForm source={source} />

@@ -45,20 +45,22 @@ type Props = {
   stagger?: number;
   /** Анимировать сразу при монтировании (для hero), а не при попадании в зону видимости */
   immediate?: boolean;
+  /** Дополнительное содержимое внутри заголовка перед анимированным текстом */
+  before?: React.ReactNode;
 };
 
 /** Заголовок, проявляющийся по словам из-под «маски» строки */
-export function RevealText({ text, as: Tag = "h2", className, delay = 0, stagger = 0.055, immediate }: Props) {
+export function RevealText({ text, as: Tag = "h2", className, delay = 0, stagger = 0.055, immediate, before }: Props) {
   const lines = tokenize(text);
-  const plain = text.replace(/\*/g, "").replace(/\n/g, " ");
   const trigger = immediate
     ? { animate: "show" }
     : { whileInView: "show", viewport: { once: true, margin: "0px 0px -10% 0px" } };
 
   return (
     <Tag className={className}>
-      <span className="sr-only">{plain}</span>
-      <motion.span aria-hidden className="block" initial="hidden" custom={{ stagger, delay }} variants={container} {...trigger}>
+      {before}
+      {/* Текст присутствует в DOM ровно один раз — важно для поисковиков и скринридеров */}
+      <motion.span className="block" initial="hidden" custom={{ stagger, delay }} variants={container} {...trigger}>
         {lines.map((line, li) => (
           <span key={li} className="block">
             {line.map((t, wi) => (

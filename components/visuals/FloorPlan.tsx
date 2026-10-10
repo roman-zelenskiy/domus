@@ -7,7 +7,7 @@ const line = { pathLength: 1, strokeDasharray: 1, strokeDashoffset: 1, fill: "no
 
 export function FloorPlan({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 400 500" className={className} role="img" aria-label="План квартиры 64 м²: спальня, гостиная, кухня и санузел">
+    <svg viewBox="0 0 400 500" className={className} role="img" aria-label="План квартири 64 м²: спальня, вітальня, кухня та санвузол">
       <defs>
         <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <line x1="0" y1="0" x2="0" y2="7" stroke="var(--color-terracotta)" strokeWidth="1.2" strokeOpacity=".22" />
@@ -102,11 +102,11 @@ export function FloorPlan({ className = "" }: { className?: string }) {
           <text x="58" y="230" fill="var(--color-terracotta)">14,2 м²</text>
         </g>
         <g className="bp-label" style={{ opacity: 0 }}>
-          <text x="262" y="84">ГОСТИНАЯ</text>
+          <text x="262" y="84">ВІТАЛЬНЯ</text>
           <text x="262" y="96" fill="var(--color-terracotta)">19,6 м²</text>
         </g>
         <g className="bp-label" style={{ opacity: 0 }}>
-          <text x="104" y="336">С/У</text>
+          <text x="104" y="336">С/В</text>
           <text x="104" y="348" fill="var(--color-terracotta)">6,1 м²</text>
         </g>
         <g className="bp-label" style={{ opacity: 0 }}>
@@ -114,7 +114,7 @@ export function FloorPlan({ className = "" }: { className?: string }) {
           <text x="204" y="422" fill="var(--color-terracotta)">17,4 м²</text>
         </g>
         <g className="bp-label" style={{ opacity: 0 }}>
-          <text x="320" y="462" textAnchor="middle" fill="var(--color-stone)">ВХОД</text>
+          <text x="320" y="462" textAnchor="middle" fill="var(--color-stone)">ВХІД</text>
         </g>
       </g>
     </svg>

@@ -48,11 +48,11 @@ export function Calculator() {
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <SectionLabel index="03">Калькулятор</SectionLabel>
-            <RevealText as="h2" text={"Сколько стоит\n*ваш* ремонт"} className="h2 mt-8" />
+            <RevealText as="h2" text={"Скільки коштує\n*ваш* ремонт"} className="h2 mt-8" />
           </div>
           <Reveal className="lg:col-span-4 lg:col-start-9" delay={0.15}>
             <p className="text-lg leading-relaxed text-stone">
-              Двигайте ползунок и выбирайте опции — комната справа «отремонтируется» вместе с расчётом.
+              Рухайте повзунок і обирайте опції — кімната праворуч «відремонтується» разом із розрахунком.
             </p>
           </Reveal>
         </div>
@@ -62,7 +62,7 @@ export function Calculator() {
           <Reveal className="lg:col-span-5">
             <div className="glass h-full rounded-[2rem] p-6 sm:p-8 md:p-10">
               <div className="flex items-end justify-between gap-4">
-                <label htmlFor={`${uid}-area`} className="eyebrow text-stone">Площадь квартиры</label>
+                <label htmlFor={`${uid}-area`} className="eyebrow text-stone">Площа квартири</label>
                 <p className="font-serif text-6xl leading-none tracking-tight">
                   <Odometer value={area} />
                   <span className="ml-1 text-3xl text-stone">м²</span>
@@ -78,8 +78,8 @@ export function Calculator() {
                 onChange={(e) => calcStore.set({ area: Number(e.target.value) })}
                 className="range mt-6"
                 style={{ "--fill": `${fill}%` } as React.CSSProperties}
-                aria-valuetext={`${area} квадратных метров`}
-                data-cursor="Тянуть"
+                aria-valuetext={`${area} квадратних метрів`}
+                data-cursor="Тягніть"
               />
               <div aria-hidden className="mt-2 flex justify-between font-mono text-[10px] text-stone">
                 {[20, 60, 100, 140, 200].map((v) => (
@@ -88,7 +88,7 @@ export function Calculator() {
               </div>
 
               <fieldset className="mt-10">
-                <legend className="eyebrow text-stone">Тип ремонта</legend>
+                <legend className="eyebrow text-stone">Тип ремонту</legend>
                 <LayoutGroup id="calc-type">
                   <div role="radiogroup" className="mt-4 grid grid-cols-3 gap-1 rounded-full border border-graphite/10 bg-paper/70 p-1">
                     {packages.map((p) => {
@@ -118,7 +118,7 @@ export function Calculator() {
               </fieldset>
 
               <fieldset className="mt-10">
-                <legend className="eyebrow text-stone">Дополнительно</legend>
+                <legend className="eyebrow text-stone">Додатково</legend>
                 <div className="mt-4 grid gap-2 sm:grid-cols-2">
                   {extras.map((ex) => {
                     const included = ex.includedIn?.includes(type);
@@ -144,8 +144,8 @@ export function Calculator() {
                         </span>
                         <span className="min-w-0">
                           <span className="block text-sm font-semibold leading-tight">{ex.label}</span>
-                          <span className={`mt-0.5 block font-mono text-[11px] ${on ? "text-paper/60" : "text-stone"}`}>
-                            {included ? "входит в пакет" : ex.hint}
+                          <span className={`mt-0.5 block font-mono text-[11px] ${on ? "text-paper/75" : "text-stone"}`}>
+                            {included ? "входить у пакет" : ex.hint}
                           </span>
                         </span>
                       </button>
@@ -174,7 +174,7 @@ export function Calculator() {
                   </span>
                   {use3D && (
                     <span className="eyebrow glass-dark hidden rounded-full px-3 py-1.5 text-[10px] text-cream/60 md:inline-block">
-                      3D · двигайте мышью
+                      3D · рухайте мишею
                     </span>
                   )}
                 </div>
@@ -183,16 +183,16 @@ export function Calculator() {
               <div className="flex flex-1 flex-col p-6 sm:p-8 md:p-10">
                 <div className="flex flex-wrap items-end justify-between gap-6">
                   <div>
-                    <p className="eyebrow text-cream/55">Предварительная стоимость</p>
+                    <p className="eyebrow text-cream/60">Попередня вартість</p>
                     <p className="mt-3 font-serif text-[clamp(2.9rem,6vw,5rem)] leading-none tracking-tight" aria-live="polite">
                       <Odometer value={estimate.total} />
                       <span className="ml-2 text-[0.55em] text-terracotta-light">₴</span>
                     </p>
                   </div>
                   <div className="sm:text-right">
-                    <p className="eyebrow text-cream/55">Срок</p>
+                    <p className="eyebrow text-cream/60">Термін</p>
                     <p className="mt-3 font-serif text-3xl leading-none">
-                      {estimate.daysFrom}–{estimate.daysTo} <span className="text-lg text-cream/60">дней</span>
+                      {estimate.daysFrom}–{estimate.daysTo} <span className="text-lg text-cream/60">днів</span>
                     </p>
                   </div>
                 </div>
@@ -220,10 +220,10 @@ export function Calculator() {
 
                 <div className="mt-auto flex flex-col gap-5 pt-8 sm:flex-row sm:items-center sm:justify-between">
                   <Button variant="light" onClick={() => open("calculator")}>
-                    Зафиксировать смету на замере
+                    Зафіксувати кошторис на замірі
                   </Button>
-                  <p className="max-w-[17rem] text-xs leading-relaxed text-cream/50">
-                    Расчёт ориентировочный. Точную смету вы получите после бесплатного замера — и дальше она не меняется.
+                  <p className="max-w-[17rem] text-xs leading-relaxed text-cream/60">
+                    Розрахунок орієнтовний. Точний кошторис ви отримаєте після безкоштовного заміру — і далі він не змінюється.
                   </p>
                 </div>
               </div>

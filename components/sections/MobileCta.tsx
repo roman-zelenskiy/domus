@@ -29,7 +29,8 @@ export function MobileCta() {
   return (
     <AnimatePresence>
       {show && (
-        <motion.div
+        <motion.aside
+          aria-label="Швидка заявка"
           className="fixed inset-x-3 bottom-3 z-40 lg:hidden"
           initial={{ y: "140%" }}
           animate={{ y: "0%" }}
@@ -42,16 +43,16 @@ export function MobileCta() {
               onClick={() => open("mobile-sticky")}
               className="h-12 flex-1 rounded-full bg-terracotta px-5 text-[15px] font-semibold text-paper"
             >
-              Бесплатный замер
+              Безкоштовний замір
             </button>
-            <a href={company.messengers.telegram} aria-label="Написать в Telegram" className="grid h-12 w-12 place-items-center rounded-full bg-paper text-graphite">
+            <a href={company.messengers.telegram} aria-label="Написати в Telegram" className="grid h-12 w-12 place-items-center rounded-full bg-paper text-graphite">
               <Telegram />
             </a>
-            <a href={company.phoneHref} aria-label={`Позвонить ${company.phone}`} className="grid h-12 w-12 place-items-center rounded-full bg-graphite text-paper">
+            <a href={company.phoneHref} aria-label={`Зателефонувати ${company.phone}`} className="grid h-12 w-12 place-items-center rounded-full bg-graphite text-paper">
               <Phone />
             </a>
           </div>
-        </motion.div>
+        </motion.aside>
       )}
     </AnimatePresence>
   );

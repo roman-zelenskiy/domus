@@ -32,7 +32,7 @@ export type Line = { id: string; label: string; amount: number; included?: boole
 export function computeEstimate({ area, type, extras: selected }: CalcState) {
   const pkg = packages.find((p) => p.id === type)!;
   const lines: Line[] = [
-    { id: "base", label: `${pkg.name} ремонт · ${area} м² × ${pkg.price.toLocaleString("ru-RU")} ₴`, amount: area * pkg.price },
+    { id: "base", label: `${pkg.name} ремонт · ${area} м² × ${pkg.price.toLocaleString("uk-UA")} ₴`, amount: area * pkg.price },
   ];
 
   let percent = 0;
@@ -51,7 +51,7 @@ export function computeEstimate({ area, type, extras: selected }: CalcState) {
 
   const subtotal = lines.reduce((s, l) => s + l.amount, 0);
   if (percent) {
-    lines.push({ id: "fastTrack", label: "Ускоренный график", amount: Math.round((subtotal * percent) / 100) });
+    lines.push({ id: "fastTrack", label: "Прискорений графік", amount: Math.round((subtotal * percent) / 100) });
   }
   const total = lines.reduce((s, l) => s + l.amount, 0);
 

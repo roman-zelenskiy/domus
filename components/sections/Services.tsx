@@ -25,13 +25,13 @@ export function Services() {
       <div className="container-x relative">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <SectionLabel index="02">Услуги и пакеты</SectionLabel>
-            <RevealText as="h2" text={"Три пакета —\n*одна* прозрачная смета"} className="h2 mt-8" />
+            <SectionLabel index="02">Послуги та пакети</SectionLabel>
+            <RevealText as="h2" text={"Три пакети —\n*один* прозорий кошторис"} className="h2 mt-8" />
           </div>
           <Reveal className="lg:col-span-4 lg:col-start-9" delay={0.15}>
             <p className="text-lg leading-relaxed text-stone">
-              Цены указаны за м² и уже включают работы и черновые материалы. Чистовые — по вашему выбору или
-              нашей комплектации.
+              Ціни вказано за м², вони вже включають роботи й чорнові матеріали. Чистові — на ваш вибір або
+              в нашій комплектації.
             </p>
           </Reveal>
         </div>
@@ -60,7 +60,7 @@ export function Services() {
                     </span>
                     {dark && (
                       <span className="eyebrow absolute top-3 right-3 rounded-full bg-terracotta px-3 py-1.5 text-[10px] text-paper">
-                        Выбирают 64%
+                        Обирають 64%
                       </span>
                     )}
                   </div>
@@ -68,12 +68,12 @@ export function Services() {
                   <div className="relative flex flex-1 flex-col px-4 pt-7 pb-5 md:px-6">
                     <div className="flex items-baseline justify-between gap-4">
                       <h3 className="font-serif text-[2.4rem] leading-none tracking-[-0.01em]">{p.name}</h3>
-                      <span className={`font-mono text-xs ${dark ? "text-cream/50" : "text-stone"}`}>0{i + 1}</span>
+                      <span className={`font-mono text-xs ${dark ? "text-cream/60" : "text-stone"}`}>0{i + 1}</span>
                     </div>
                     <p className={`mt-3 text-[15px] leading-relaxed ${dark ? "text-cream/70" : "text-stone"}`}>{p.tagline}</p>
 
                     <p className="mt-7 flex items-baseline gap-2">
-                      <span className={`eyebrow ${dark ? "text-cream/50" : "text-stone"}`}>от</span>
+                      <span className={`eyebrow ${dark ? "text-cream/60" : "text-stone"}`}>від</span>
                       <span className="font-serif text-5xl leading-none">{formatNumber(p.price)}</span>
                       <span className={`text-sm ${dark ? "text-cream/70" : "text-stone"}`}>₴/м²</span>
                     </p>
@@ -96,7 +96,7 @@ export function Services() {
                           : "border-graphite/15 hover:border-graphite hover:bg-graphite hover:text-paper"
                       }`}
                     >
-                      Рассчитать «{p.name.toLowerCase()}»
+                      Розрахувати «{p.name.toLowerCase()}»
                       <ArrowRight className="transition-transform duration-500 group-hover/btn:translate-x-1" />
                     </button>
                   </div>

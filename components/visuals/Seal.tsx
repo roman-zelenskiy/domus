@@ -7,14 +7,14 @@ export function Seal({ className = "" }: { className?: string }) {
           <path id="seal-circle" d="M80 80 m-60 0 a60 60 0 1 1 120 0 a60 60 0 1 1 -120 0" />
         </defs>
         <text className="font-mono" fontSize="10" fill="currentColor">
-          <textPath href="#seal-circle" textLength="370" lengthAdjust="spacing">ГАРАНТИЯ В ДОГОВОРЕ · ФИКСИРОВАННАЯ СМЕТА ·</textPath>
+          <textPath href="#seal-circle" textLength="370" lengthAdjust="spacing">ГАРАНТІЯ В ДОГОВОРІ · ФІКСОВАНИЙ КОШТОРИС ·</textPath>
         </text>
       </svg>
       <div className="relative text-center leading-none">
         <span className="block font-serif text-5xl">3</span>
-        <span className="eyebrow mt-1 block text-[9px] text-paper/85">года</span>
+        <span className="eyebrow mt-1 block text-[9px] text-paper/85">роки</span>
       </div>
-      <span className="sr-only">Гарантия 3 года, фиксированная смета</span>
+      <span className="sr-only">Гарантія 3 роки, фіксований кошторис</span>
     </div>
   );
 }

@@ -5,10 +5,10 @@
   --color-cream: #f3eee5;
   --color-sand: #e4d9c6;
   --color-linen: #cbbba2;
-  --color-stone: #6f675c;
+  --color-stone: #5f574d;
   --color-graphite: #22201d;
   --color-graphite-2: #2e2b27;
-  --color-terracotta: #a94e34;
+  --color-terracotta: #9c4630;
   --color-terracotta-light: #d88b69;
 
   --font-serif: var(--font-cormorant), "Times New Roman", serif;
@@ -156,6 +156,10 @@ html.lenis body {
     text-transform: uppercase;
   }
 
+  .accent,
+  .font-serif.italic {
+    font-family: var(--font-cormorant-italic), var(--font-serif);
+  }
   .accent {
     font-style: italic;
     color: var(--color-terracotta);

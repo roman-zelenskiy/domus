@@ -113,7 +113,7 @@ export function Logo({ className = "" }: { className?: string }) {
         <path d="M9.5 24V14.5a5.5 5.5 0 0 1 11 0V24" stroke="currentColor" strokeWidth="1.5" />
         <circle cx="18" cy="18.5" r="1.4" fill="var(--color-terracotta)" />
       </svg>
-      <span className="font-serif text-[1.65rem] font-medium leading-none tracking-[-0.02em]">Domus</span>
+      <span className="font-serif text-[1.7rem] leading-none tracking-[-0.02em]">Domus</span>
     </span>
   );
 }

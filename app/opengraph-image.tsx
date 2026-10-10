@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-export const alt = "Domus — ремонт квартир под ключ в Киеве с фиксированной сметой";
+export const alt = "Domus — ремонт квартир під ключ у Києві з фіксованим кошторисом";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 // Генерируется при сборке — работает и в статическом экспорте
@@ -35,18 +35,18 @@ export default async function Image() {
             <div style={{ width: 20, height: 28, borderTopLeftRadius: 10, borderTopRightRadius: 10, border: "2.5px solid #22201d", borderBottom: "none", marginBottom: 6 }} />
           </div>
           <span style={{ fontFamily: "Cormorant", fontSize: 48 }}>Domus</span>
-          <span style={{ marginLeft: "auto", fontSize: 22, letterSpacing: 4, color: "#6f675c" }}>КИЕВ · С 2018</span>
+          <span style={{ marginLeft: "auto", fontSize: 22, letterSpacing: 4, color: "#6f675c" }}>КИЇВ · З 2018</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontFamily: "Cormorant", fontSize: 104, lineHeight: 0.95, letterSpacing: -2 }}>Ремонт под ключ</div>
+          <div style={{ fontFamily: "Cormorant", fontSize: 104, lineHeight: 0.95, letterSpacing: -2 }}>Ремонт під ключ</div>
           <div style={{ display: "flex", fontFamily: "Cormorant", fontSize: 104, lineHeight: 0.95, letterSpacing: -2 }}>
-            с&nbsp;<span style={{ color: "#a94e34" }}>фиксированной</span>&nbsp;сметой
+            з&nbsp;<span style={{ color: "#9c4630" }}>фіксованим</span>&nbsp;кошторисом
           </div>
         </div>
         <div style={{ display: "flex", gap: 40, fontSize: 26, color: "#6f675c" }}>
-          <span>Гарантия 3 года</span>
-          <span>350+ объектов</span>
-          <span>Бесплатный замер</span>
+          <span>Гарантія 3 роки</span>
+          <span>350+ об’єктів</span>
+          <span>Безкоштовний замір</span>
         </div>
       </div>
     ),

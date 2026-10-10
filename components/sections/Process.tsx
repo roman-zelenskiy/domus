@@ -97,13 +97,13 @@ export function Process() {
         <div className="lg:col-span-5">
           <div>
             <SectionLabel index="04" dark>
-              Этапы работы
+              Етапи роботи
             </SectionLabel>
-            <RevealText as="h2" text={"Шесть этапов\nи *ни одного*\nсюрприза"} className="h2 mt-8" />
+            <RevealText as="h2" text={"Шість етапів\nі *жодного*\nсюрпризу"} className="h2 mt-8" />
             <Reveal delay={0.15}>
               <p className="mt-8 max-w-md text-lg leading-relaxed text-cream/65">
-                У каждого этапа есть срок, ответственный и акт приёмки. Вы всегда знаете, что происходит на
-                объекте сегодня и что будет завтра.
+                Кожен етап має термін, відповідального та акт приймання. Ви завжди знаєте, що відбувається на
+                об’єкті сьогодні й що буде завтра.
               </p>
             </Reveal>
           </div>
@@ -125,7 +125,7 @@ export function Process() {
                 </AnimatePresence>
               </div>
               <div className="pb-4">
-                <p className="eyebrow text-cream/45">из 06</p>
+                <p className="eyebrow text-cream/60">з 06</p>
                 <p className="mt-2 max-w-[12rem] font-serif text-2xl leading-tight">{steps[active].title}</p>
               </div>
             </div>
@@ -154,7 +154,7 @@ export function Process() {
 
                 <article className="brick glass-dark relative rounded-[1.5rem] p-7 md:p-9">
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <span className="eyebrow text-terracotta-light">Этап 0{i + 1}</span>
+                    <span className="eyebrow text-terracotta-light">Етап 0{i + 1}</span>
                     <span className="eyebrow rounded-full border border-cream/15 px-3 py-1.5 text-[10px] text-cream/70">
                       {s.duration}
                     </span>

@@ -38,17 +38,17 @@ export function Team() {
       <div className="container-x">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
-            <SectionLabel index="08">О компании</SectionLabel>
-            <RevealText as="h2" text={"Domus\nпо-латыни —\n*«дом»*"} className="h2 mt-8" />
+            <SectionLabel index="08">Про компанію</SectionLabel>
+            <RevealText as="h2" text={"Domus\nлатиною —\n*«дім»*"} className="h2 mt-8" />
             <Reveal delay={0.1}>
               <div className="mt-8 max-w-md space-y-5 text-lg leading-relaxed text-stone">
                 <p>
-                  Мы начинали в 2018 году с бригады из пяти человек и одного правила: смета, которую подписал
-                  клиент, не меняется. Сегодня у нас 42 мастера в штате, свой проектный отдел и технадзор.
+                  Ми починали у 2018 році з бригади з п’яти людей і одного правила: кошторис, який підписав
+                  клієнт, не змінюється. Сьогодні в нас 42 майстри в штаті, власний проєктний відділ і технагляд.
                 </p>
                 <p>
-                  Мы не берём больше 14 объектов одновременно — так у каждого проекта есть внимание инженера,
-                  а не «прораба на пять квартир».
+                  Ми не беремо понад 14 об’єктів одночасно — так кожен проєкт має увагу інженера,
+                  а не «виконроба на п’ять квартир».
                 </p>
               </div>
             </Reveal>
@@ -56,15 +56,15 @@ export function Team() {
             <Reveal delay={0.2}>
               <figure className="mt-12 border-l-2 border-terracotta pl-6">
                 <blockquote className="font-serif text-[1.65rem] leading-[1.2] italic">
-                  «Ремонт — это не про плитку. Это про то, чтобы человеку было спокойно все три месяца, пока мы
-                  работаем».
+                  «Ремонт — це не про плитку. Це про те, щоб людині було спокійно всі три місяці, поки ми
+                  працюємо».
                 </blockquote>
                 <figcaption className="mt-5 flex items-center gap-4">
                   <Signature />
                   <span className="text-sm text-stone">
-                    Андрей Коваленко,
+                    Андрій Коваленко,
                     <br />
-                    основатель
+                    засновник
                   </span>
                 </figcaption>
               </figure>
@@ -77,7 +77,7 @@ export function Team() {
                 <motion.div style={{ y }} className="absolute -inset-y-[10%] inset-x-0">
                   <Image
                     src={aboutImage}
-                    alt="Инженер Domus размечает чертёж планировки с линейкой и карандашом"
+                    alt="Інженер Domus розмічає креслення планування з лінійкою та олівцем"
                     fill
                     sizes="(min-width: 1024px) 45vw, 100vw"
                     className="object-cover"
@@ -85,8 +85,8 @@ export function Team() {
                 </motion.div>
                 <div className="glass absolute right-4 bottom-4 left-4 flex items-center justify-between gap-4 rounded-2xl p-5 sm:right-auto sm:max-w-xs">
                   <div>
-                    <p className="eyebrow text-[10px] text-stone">Проектный отдел</p>
-                    <p className="mt-1.5 font-serif text-2xl leading-tight">6 инженеров и 3 дизайнера</p>
+                    <p className="eyebrow text-[10px] text-stone">Проєктний відділ</p>
+                    <p className="mt-1.5 font-serif text-2xl leading-tight">6 інженерів і 3 дизайнери</p>
                   </div>
                 </div>
               </div>
