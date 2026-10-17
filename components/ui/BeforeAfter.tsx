@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { animate, motion, useInView, useMotionValue, useMotionValueEvent, useSpring, useTransform, useVelocity } from "motion/react";
 import { useEffect, useRef } from "react";
+import { useI18n } from "@/components/providers/I18n";
 
 type Props = {
   before: string;
@@ -20,6 +21,7 @@ const clamp = (v: number) => Math.min(98, Math.max(2, v));
  */
 export function BeforeAfter({ before, after, beforeAlt, afterAlt, className = "" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const t = useI18n().t.ba;
   const dragging = useRef(false);
   const touched = useRef(false);
   const pos = useMotionValue(50);
@@ -74,7 +76,7 @@ export function BeforeAfter({ before, after, beforeAlt, afterAlt, className = ""
       onPointerMove={(e) => dragging.current && setFromClient(e.clientX)}
       onPointerUp={() => (dragging.current = false)}
       onPointerCancel={() => (dragging.current = false)}
-      data-cursor="Тягніть"
+      data-cursor={t.drag}
     >
       <Image src={after} alt={afterAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="pointer-events-none object-cover" />
 
@@ -82,9 +84,9 @@ export function BeforeAfter({ before, after, beforeAlt, afterAlt, className = ""
         <motion.div className="absolute inset-0 will-change-transform" style={{ x: innerX }}>
           <Image src={before} alt={beforeAlt} fill sizes="(min-width: 1024px) 66vw, 100vw" className="pointer-events-none object-cover grayscale-[0.35]" />
         </motion.div>
-        <span className="eyebrow glass absolute top-5 left-5 rounded-full px-3 py-1.5 text-[10px] text-graphite">До</span>
+        <span className="eyebrow glass absolute top-5 left-5 rounded-full px-3 py-1.5 text-[10px] text-graphite">{t.before}</span>
       </motion.div>
-      <span className="eyebrow glass absolute top-5 right-5 rounded-full px-3 py-1.5 text-[10px] text-graphite">Після</span>
+      <span className="eyebrow glass absolute top-5 right-5 rounded-full px-3 py-1.5 text-[10px] text-graphite">{t.after}</span>
 
       {/* Ручка-уровень: прикреплена к правому краю слоя «до» */}
       <motion.div className="pointer-events-none absolute inset-0" style={{ x: outerX }}>
@@ -93,11 +95,11 @@ export function BeforeAfter({ before, after, beforeAlt, afterAlt, className = ""
           ref={slider}
           role="slider"
           tabIndex={0}
-          aria-label="Порівняння до та після ремонту"
+          aria-label={t.aria}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={50}
-          aria-valuetext="Перетягніть, щоб порівняти"
+          aria-valuetext={t.valuetext}
           onKeyDown={onKey}
           className="pointer-events-auto absolute top-1/2 right-0 flex h-16 w-16 translate-x-1/2 -translate-y-1/2 cursor-grab items-center justify-center rounded-full border border-white/60 bg-paper/80 shadow-xl backdrop-blur-md active:cursor-grabbing"
         >

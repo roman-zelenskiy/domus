@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useId, useState, useSyncExternalStore } from "react";
-import { contactTimes } from "@/content/site";
+import { useI18n } from "@/components/providers/I18n";
+import { href } from "@/lib/i18n";
+import type { Ui } from "@/content/ui";
 import { formatPhone, isValidPhone, phoneDigits } from "@/lib/format";
 import { lastLead, leadsStore, submitLead } from "@/lib/leads";
 import { EASE } from "./Reveal";
@@ -12,17 +14,20 @@ import { Button } from "./Button";
 type Status = "idle" | "loading" | "success";
 type Errors = Partial<Record<"name" | "phone", string>>;
 
-function validate(name: string, phone: string): Errors {
+function validate(name: string, phone: string, t: Ui["form"]): Errors {
   const errors: Errors = {};
-  if (name.trim().length < 2) errors.name = "Як до вас звертатися? Мінімум 2 літери";
-  else if (!/^[\p{L}\s'’-]+$/u.test(name.trim())) errors.name = "Лише літери, будь ласка";
-  if (!phone) errors.phone = "Вкажіть номер, щоб ми могли передзвонити";
-  else if (!isValidPhone(phone)) errors.phone = "Номер неповний: +380 (XX) XXX-XX-XX";
+  if (name.trim().length < 2) errors.name = t.errName;
+  else if (!/^[\p{L}\s'’-]+$/u.test(name.trim())) errors.name = t.errLetters;
+  if (!phone) errors.phone = t.errPhone;
+  else if (!isValidPhone(phone)) errors.phone = t.errPhoneShort;
   return errors;
 }
 
 export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" | "dark"; source?: string }) {
   const uid = useId();
+  const { lang, site, t: ui } = useI18n();
+  const t = ui.form;
+  const { contactTimes } = site;
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [time, setTime] = useState(contactTimes[1]);
@@ -32,7 +37,7 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
   // Заявка, оставленная раньше в этом браузере (демо-хранилище в localStorage)
   const previous = lastLead(useSyncExternalStore(leadsStore.subscribe, leadsStore.getSnapshot, leadsStore.getServerSnapshot));
 
-  const errors = validate(name, phone);
+  const errors = validate(name, phone, t);
   const show = (f: keyof Errors) => (touched[f] || submitted) && errors[f];
   const dark = tone === "dark";
 
@@ -90,13 +95,13 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
               />
             </svg>
             <p className="mt-6 font-serif text-4xl leading-tight">
-              Дякуємо, {name.trim().split(" ")[0]}!
+              {t.thanks(name.trim().split(" ")[0])}
             </p>
             <p className={`mx-auto mt-3 max-w-sm ${dark ? "text-cream/70" : "text-stone"}`}>
-              Інженер передзвонить протягом 15 хвилин у робочий час, щоб домовитися про замір.
+              {t.callback}
             </p>
             <button type="button" onClick={reset} className={`eyebrow mt-8 underline underline-offset-4 ${dark ? "text-cream/60" : "text-stone"}`}>
-              Надіслати ще одну заявку
+              {t.again}
             </button>
           </motion.div>
         ) : (
@@ -112,19 +117,17 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
           >
             {previous && (
               <p className={`rounded-2xl px-4 py-3 text-sm ${dark ? "bg-cream/5 text-cream/70" : "bg-sand/60 text-stone"}`}>
-                {previous.name}, ви вже залишали заявку{" "}
-                {new Date(previous.createdAt).toLocaleDateString("uk-UA", { day: "numeric", month: "long" })}. Якщо
-                щось змінилося — надішліть ще одну.
+                {t.previous(previous.name, new Date(previous.createdAt).toLocaleDateString(ui.locale, { day: "numeric", month: "long" }))}
               </p>
             )}
 
             <div>
-              <label htmlFor={`${uid}-name`} className={label}>Ваше ім’я</label>
+              <label htmlFor={`${uid}-name`} className={label}>{t.name}</label>
               <input
                 id={`${uid}-name`}
                 name="name"
                 autoComplete="given-name"
-                placeholder="Ганна"
+                placeholder={t.namePh}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 onBlur={() => setTouched((t) => ({ ...t, name: true }))}
@@ -136,7 +139,7 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
             </div>
 
             <div>
-              <label htmlFor={`${uid}-phone`} className={label}>Телефон</label>
+              <label htmlFor={`${uid}-phone`} className={label}>{t.phone}</label>
               <input
                 id={`${uid}-phone`}
                 name="phone"
@@ -159,7 +162,7 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
             </div>
 
             <fieldset>
-              <legend className={label}>Коли зручно зателефонувати</legend>
+              <legend className={label}>{t.time}</legend>
               <div className="flex flex-wrap gap-2">
                 {contactTimes.map((t) => {
                   const active = t === time;
@@ -186,12 +189,12 @@ export function LeadForm({ tone = "light", source = "form" }: { tone?: "light" |
                   {status === "loading" && (
                     <span aria-hidden className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent" />
                   )}
-                  {status === "loading" ? "Надсилаємо…" : "Записатися на замір"}
+                  {status === "loading" ? t.sending : t.submit}
                 </span>
               </Button>
               <p className={`max-w-[16rem] text-xs leading-relaxed ${dark ? "text-cream/60" : "text-stone"}`}>
-                Натискаючи кнопку, ви погоджуєтеся з{" "}
-                <Link href="/privacy" className="underline underline-offset-2">політикою конфіденційності</Link>
+                {t.consent}{" "}
+                <Link href={href("/privacy", lang)} className="underline underline-offset-2">{t.policy}</Link>
               </p>
             </div>
 

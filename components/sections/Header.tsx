@@ -2,7 +2,8 @@
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useEffect, useState } from "react";
-import { company, nav } from "@/content/site";
+import { useI18n } from "@/components/providers/I18n";
+import { LangSwitch } from "@/components/ui/LangSwitch";
 import { useLeadModal } from "@/components/providers/LeadModal";
 import { useLenis } from "@/components/providers/SmoothScroll";
 import { Button } from "@/components/ui/Button";
@@ -15,6 +16,8 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [menu, setMenu] = useState(false);
   const { open } = useLeadModal();
+  const { site, t } = useI18n();
+  const { company, nav } = site;
   const lenisRef = useLenis();
 
   useMotionValueEvent(scrollY, "change", (y) => {
@@ -47,11 +50,11 @@ export function Header() {
               aria-hidden
               className={`glass absolute inset-0 -z-10 rounded-full transition-opacity duration-700 ${scrolled || menu ? "opacity-100" : "opacity-0"}`}
             />
-            <a href="#top" aria-label="Domus — на головну" className="relative">
+            <a href="#top" aria-label={t.homeAria} className="relative">
               <Logo />
             </a>
 
-            <nav aria-label="Основна навігація" className="hidden lg:block">
+            <nav aria-label={t.header.nav} className="hidden lg:block">
               <ul className="flex items-center gap-1">
                 {nav.map((item) => (
                   <li key={item.href}>
@@ -78,15 +81,16 @@ export function Header() {
                 <Phone width={16} height={16} />
                 {company.phone}
               </a>
+              <LangSwitch />
               <div className="hidden sm:block">
-                <Button onClick={() => open("header")}>Замір безкоштовно</Button>
+                <Button onClick={() => open("header")}>{t.header.cta}</Button>
               </div>
               <button
                 type="button"
                 onClick={() => setMenu((m) => !m)}
                 aria-expanded={menu}
                 aria-controls="mobile-menu"
-                aria-label={menu ? "Закрити меню" : "Відкрити меню"}
+                aria-label={menu ? t.header.closeMenu : t.header.openMenu}
                 className="relative grid h-12 w-12 place-items-center rounded-full bg-graphite text-paper lg:hidden"
               >
                 <span className="relative block h-3 w-5">
@@ -110,7 +114,7 @@ export function Header() {
             data-lenis-prevent
           >
             <div className="blueprint-grid pointer-events-none absolute inset-0 opacity-60" />
-            <nav aria-label="Мобільна навігація" className="relative flex-1">
+            <nav aria-label={t.header.mobileNav} className="relative flex-1">
               <ul className="space-y-1">
                 {nav.map((item, i) => (
                   <li key={item.href} className="overflow-hidden">
@@ -158,7 +162,7 @@ export function Header() {
                 size="lg"
                 magnetic={false}
               >
-                Записатися на безкоштовний замір
+                {t.header.mobileCta}
               </Button>
             </motion.div>
           </motion.div>

@@ -6,6 +6,7 @@ import { LeadForm } from "@/components/ui/LeadForm";
 import { Close } from "@/components/ui/Icons";
 import { EASE } from "@/components/ui/Reveal";
 import { useLenis } from "./SmoothScroll";
+import { useI18n } from "./I18n";
 
 const ModalContext = createContext<{ open: (source?: string) => void }>({ open: () => {} });
 
@@ -41,6 +42,8 @@ export function LeadModalProvider({ children }: { children: React.ReactNode }) {
 
 function Dialog({ source, onClose }: { source: string; onClose: () => void }) {
   const panel = useRef<HTMLDivElement>(null);
+  const { t: ui } = useI18n();
+  const t = ui.modal;
 
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -100,18 +103,18 @@ function Dialog({ source, onClose }: { source: string; onClose: () => void }) {
         <button
           type="button"
           onClick={onClose}
-          aria-label="Закрити"
+          aria-label={ui.close}
           className="absolute top-4 right-4 grid h-11 w-11 place-items-center rounded-full border border-graphite/15 transition-colors hover:bg-graphite hover:text-paper"
         >
           <Close />
         </button>
         <div className="relative">
-          <p className="eyebrow text-terracotta">Безкоштовно · 40 хвилин · без зобов’язань</p>
+          <p className="eyebrow text-terracotta">{t.eyebrow}</p>
           <h2 id="lead-modal-title" className="mt-4 font-serif text-[2.6rem] leading-[0.95] tracking-[-0.02em] sm:text-5xl">
-            Запишіться на <span className="accent">замір</span>
+            {t.titleA} <span className="accent">{t.titleB}</span>
           </h2>
           <p className="mt-4 max-w-md text-stone">
-            Інженер приїде з лазерним далекоміром, огляне комунікації та через 3 дні надішле кошторис, який не зміниться.
+            {t.text}
           </p>
           <div className="mt-8">
             <LeadForm source={source} />

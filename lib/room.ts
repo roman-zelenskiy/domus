@@ -1,4 +1,4 @@
-import type { ExtraId, PackageId } from "@/content/site";
+import type { ExtraId, PackageId } from "@/content/site.uk";
 
 /** Что показывать в визуализации комнаты для выбранного пакета и опций */
 export function roomFeatures(type: PackageId, extras: ExtraId[]) {

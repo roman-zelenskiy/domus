@@ -93,6 +93,45 @@ body::after {
     outline: 2px solid var(--color-terracotta);
     outline-offset: 3px;
   }
+
+  /* Tailwind preflight скидає pointer на кнопках: повертаємо для всього клікабельного
+     (на десктопі з мишею його й так замінює кастомний курсор) */
+  a[href],
+  button,
+  summary,
+  label[for],
+  select,
+  [role="button"],
+  [role="tab"],
+  [role="radio"],
+  [role="checkbox"],
+  [role="option"],
+  input[type="range"],
+  input[type="radio"],
+  input[type="checkbox"] {
+    cursor: pointer;
+  }
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}
+
+/* Тонкі теплі скролбари — у модалці, меню й горизонтальних стрічках */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(156 70 48 / 0.45) transparent;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(156 70 48 / 0.45);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* Кастомный курсор активен только на десктопе */

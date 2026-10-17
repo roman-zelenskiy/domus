@@ -1,10 +1,11 @@
-/** 1248000 → «1 248 000» с неразрывными пробелами */
-export const formatNumber = (n: number) =>
+/** 1248000 → «1 248 000» (uk, нерозривні пробіли) або «1,248,000» (en) */
+export const formatNumber = (n: number, locale = "uk-UA") =>
   Math.round(n)
     .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    .replace(/\B(?=(\d{3})+(?!\d))/g, locale.startsWith("uk") ? "\u00a0" : ",");
 
-export const formatUAH = (n: number) => `${formatNumber(n)} ₴`;
+export const formatUAH = (n: number, locale = "uk-UA") =>
+  locale.startsWith("uk") ? `${formatNumber(n, locale)} ₴` : `${formatNumber(n, locale)} UAH`;
 
 /** Маска украинского номера: +380 (XX) XXX-XX-XX */
 export function formatPhone(raw: string) {

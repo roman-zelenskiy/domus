@@ -1,7 +1,9 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { extras, packages, type ExtraId, type PackageId } from "@/content/site";
+import type { ExtraId, PackageId } from "@/content/site.uk";
+import type { Dict } from "@/lib/i18n";
+import { formatNumber } from "@/lib/format";
 
 export type CalcState = {
   area: number;
@@ -29,10 +31,11 @@ export const useCalc = () => useSyncExternalStore(calcStore.subscribe, calcStore
 
 export type Line = { id: string; label: string; amount: number; included?: boolean };
 
-export function computeEstimate({ area, type, extras: selected }: CalcState) {
+export function computeEstimate({ area, type, extras: selected }: CalcState, { site, t }: Dict) {
+  const { extras, packages } = site;
   const pkg = packages.find((p) => p.id === type)!;
   const lines: Line[] = [
-    { id: "base", label: `${pkg.name} ремонт · ${area} м² × ${pkg.price.toLocaleString("uk-UA")} ₴`, amount: area * pkg.price },
+    { id: "base", label: t.calc.base(pkg.name, area, formatNumber(pkg.price, t.locale)), amount: area * pkg.price },
   ];
 
   let percent = 0;
@@ -51,7 +54,7 @@ export function computeEstimate({ area, type, extras: selected }: CalcState) {
 
   const subtotal = lines.reduce((s, l) => s + l.amount, 0);
   if (percent) {
-    lines.push({ id: "fastTrack", label: "Прискорений графік", amount: Math.round((subtotal * percent) / 100) });
+    lines.push({ id: "fastTrack", label: t.calc.fast, amount: Math.round((subtotal * percent) / 100) });
   }
   const total = lines.reduce((s, l) => s + l.amount, 0);
 

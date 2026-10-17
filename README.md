@@ -20,6 +20,16 @@ npm run build && npm start   # production
 - `content/site.ts` — все тексты, цены, фото, контакты
 - `lib/` — калькулятор, маска телефона, фейковое хранилище заявок (`leads.ts`), хуки
 
+## Языки
+
+Две версии: `/uk/` и `/en/`, обе пререндерятся. Корень `/` выбирает язык до первой отрисовки: часовой пояс Украины → украинский, остальные → английский. Ручной выбор (UA / EN в шапке) сохраняется в `localStorage` и имеет приоритет. Без JS корень показывает ссылки на обе версии.
+
+- Контент: `content/site.uk.ts` и `content/site.en.ts` (одинаковая форма), строки интерфейса — `content/ui.ts`.
+- `app/[lang]/layout.tsx` — корневой layout с `generateStaticParams`. Серверные компоненты берут словарь через `getI18n()` (`next/root-params`), клиентские — через `useI18n()`.
+- `app/(root)` — страница выбора языка, `app/global-not-found.tsx` — общая 404 (флаг `experimental.globalNotFound`).
+- SEO: `hreflang` для обеих версий, `og:locale`, `<html lang>`, OG-картинка на каждом языке, sitemap с альтернативами.
+- Перед `tsc` в CI нужен `next typegen`: типы `LayoutProps` и `next/root-params` генерируются.
+
 ## Деплой на GitHub Pages
 
 Workflow: `.github/workflows/deploy-pages.yml` — на каждый push в `main` проверяет типы и линтер,

@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useEffect, useState } from "react";
-import { company } from "@/content/site";
+import { useI18n } from "@/components/providers/I18n";
 import { useLeadModal } from "@/components/providers/LeadModal";
 import { Phone, Telegram } from "@/components/ui/Icons";
 import { EASE } from "@/components/ui/Reveal";
@@ -13,6 +13,9 @@ export function MobileCta() {
   const [pastHero, setPastHero] = useState(false);
   const [nearForm, setNearForm] = useState(false);
   const { open } = useLeadModal();
+  const { site, t: ui } = useI18n();
+  const { company } = site;
+  const t = ui.mcta;
 
   useMotionValueEvent(scrollY, "change", (y) => setPastHero(y > window.innerHeight * 0.8));
 
@@ -30,7 +33,7 @@ export function MobileCta() {
     <AnimatePresence>
       {show && (
         <motion.aside
-          aria-label="Швидка заявка"
+          aria-label={t.aria}
           className="fixed inset-x-3 bottom-3 z-40 lg:hidden"
           initial={{ y: "140%" }}
           animate={{ y: "0%" }}
@@ -43,12 +46,12 @@ export function MobileCta() {
               onClick={() => open("mobile-sticky")}
               className="h-12 flex-1 rounded-full bg-terracotta px-5 text-[15px] font-semibold text-paper"
             >
-              Безкоштовний замір
+              {t.cta}
             </button>
-            <a href={company.messengers.telegram} aria-label="Написати в Telegram" className="grid h-12 w-12 place-items-center rounded-full bg-paper text-graphite">
+            <a href={company.messengers.telegram} aria-label={t.tg} className="grid h-12 w-12 place-items-center rounded-full bg-paper text-graphite">
               <Telegram />
             </a>
-            <a href={company.phoneHref} aria-label={`Зателефонувати ${company.phone}`} className="grid h-12 w-12 place-items-center rounded-full bg-graphite text-paper">
+            <a href={company.phoneHref} aria-label={t.call(company.phone)} className="grid h-12 w-12 place-items-center rounded-full bg-graphite text-paper">
               <Phone />
             </a>
           </div>

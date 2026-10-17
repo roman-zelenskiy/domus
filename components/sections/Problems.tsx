@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { problems } from "@/content/site";
+import { useI18n } from "@/components/providers/I18n";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { RevealText } from "@/components/ui/RevealText";
 import { Reveal } from "@/components/ui/Reveal";
@@ -27,6 +27,9 @@ function TrowelEdge() {
 
 export function Problems() {
   const root = useRef<HTMLElement>(null);
+  const { site, t: ui } = useI18n();
+  const { problems } = site;
+  const t = ui.problems;
 
   useGSAP(
     () => {
@@ -51,26 +54,25 @@ export function Problems() {
   return (
     <section ref={root} id="problems" aria-labelledby="problems-title" className="relative py-28 md:py-40">
       <div className="container-x">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <SectionLabel index="01">Знайомо?</SectionLabel>
+            <SectionLabel index="01">{t.label}</SectionLabel>
             <RevealText
               as="h2"
-              text={"Чому ремонт зазвичай\nперетворюється на *стрес*"}
+              text={t.title}
               className="h2 mt-8"
             />
           </div>
           <Reveal className="lg:col-span-4" delay={0.2}>
             <p className="max-w-sm text-lg leading-relaxed text-stone">
-              За 8 років ми переробили десятки чужих ремонтів — і вибудували процес так, щоб ці три проблеми
-              не виникали в принципі.
+              {t.lead}
             </p>
           </Reveal>
         </div>
 
         <ol className="mt-20 md:mt-28">
           {problems.map((p, i) => (
-            <li key={p.title} className="problem-row grid gap-8 border-t hairline py-10 md:grid-cols-12 md:gap-6 md:py-14">
+            <li key={p.title} className="problem-row grid grid-cols-1 gap-8 border-t hairline py-10 md:grid-cols-12 md:gap-6 md:py-14">
               <p className="font-mono text-sm text-terracotta md:col-span-1">0{i + 1}</p>
 
               <div className="md:col-span-5 md:pr-8">
@@ -92,7 +94,7 @@ export function Problems() {
                       <span className="grid h-9 w-9 place-items-center rounded-full bg-terracotta text-paper">
                         <Check width={18} height={18} />
                       </span>
-                      <span className="eyebrow text-terracotta">Як у Domus</span>
+                      <span className="eyebrow text-terracotta">{t.how}</span>
                     </div>
                     <h4 className="mt-6 font-serif text-[1.9rem] leading-[1.02] md:text-4xl">{p.solutionTitle}</h4>
                     <p className="mt-3 max-w-md leading-relaxed text-stone">{p.solution}</p>
@@ -107,7 +109,7 @@ export function Problems() {
                     <TrowelEdge />
                     <div className="absolute inset-0 opacity-60 [background:repeating-linear-gradient(100deg,transparent_0_38px,rgb(255_255_255/0.35)_38px_40px,transparent_40px_90px)]" />
                     <div className="absolute inset-0 opacity-40 mix-blend-multiply" style={{ backgroundImage: "var(--noise)" }} />
-                    <span className="eyebrow absolute right-6 bottom-6 text-stone/80">Рішення →</span>
+                    <span className="eyebrow absolute right-6 bottom-6 text-stone/80">{t.reveal}</span>
                   </div>
                 </div>
               </div>

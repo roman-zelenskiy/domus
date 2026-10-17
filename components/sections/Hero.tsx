@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useRef, useState } from "react";
-import { heroImage } from "@/content/site";
+import { useI18n } from "@/components/providers/I18n";
 import { gsap, useGSAP, MOTION_OK, REDUCED } from "@/lib/gsap";
 import { useLeadModal } from "@/components/providers/LeadModal";
 import { Button } from "@/components/ui/Button";
@@ -24,6 +24,8 @@ export function Hero() {
   const timeline = useRef<gsap.core.Timeline | null>(null);
   const [done, setDone] = useState(false);
   const { open } = useLeadModal();
+  const { site, t: ui } = useI18n();
+  const t = ui.hero;
 
   // Параллакс слоёв за курсором: фото, чертёж и карточки двигаются с разной глубиной
   const mx = useMotionValue(0);
@@ -113,14 +115,14 @@ export function Hero() {
         <div className="blueprint-grid absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_30%_40%,black,transparent_70%)]" />
       </div>
 
-      <div className="container-x grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+      <div className="container-x grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="relative z-10 lg:col-span-6">
           <RevealText
             as="h1"
             immediate
             delay={0.25}
             stagger={0.07}
-            text={"Під ключ —\nз *фіксованим*\nкошторисом"}
+            text={t.title}
             className="display text-[clamp(3rem,6.6vw,7.4rem)]"
             before={
               <motion.span {...fade(0.1)} className="eyebrow mb-7 flex items-center gap-3 leading-normal text-stone">
@@ -128,32 +130,27 @@ export function Hero() {
                   <span className="absolute inset-0 animate-pin-pulse rounded-full bg-terracotta" />
                   <span className="relative h-2 w-2 rounded-full bg-terracotta" />
                 </span>
-                Ремонт квартир у Києві{" "}
+                {t.eyebrow}{" "}
               </motion.span>
             }
           />
 
           {/* Только сдвиг без прозрачности: абзац — LCP-элемент на мобильных */}
           <motion.p initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 1.1, ease: EASE, delay: 0.9 }} className="mt-8 max-w-[34rem] text-[17px] leading-relaxed text-stone md:text-lg">
-            Беремо квартиру від голих стін до останньої розетки. Ціну й терміни фіксуємо в договорі до початку
-            робіт — і даємо <strong className="font-semibold text-graphite">гарантію 3 роки</strong> на все, що зробили.
+            {t.leadA} <strong className="font-semibold text-graphite">{t.leadB}</strong> {t.leadC}
           </motion.p>
 
           <motion.div {...fade(1.05)} className="mt-10 flex flex-wrap items-center gap-3">
             <Button size="lg" onClick={() => open("hero")}>
-              Безкоштовний замір
+              {t.cta}
             </Button>
             <Button size="lg" variant="ghost" href="#calculator">
-              Розрахувати вартість
+              {t.calc}
             </Button>
           </motion.div>
 
           <motion.dl {...fade(1.2)} className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t hairline pt-6">
-            {[
-              ["350+", "об’єктів здано"],
-              ["8 років", "на ринку Києва"],
-              ["4,9", "рейтинг Google"],
-            ].map(([v, l], i) => (
+            {t.stats.map(([v, l], i) => (
               <div key={l}>
                 <dt className="sr-only">{l}</dt>
                 <dd className="flex items-center gap-1.5 font-serif text-3xl leading-none md:text-[2.4rem]">
@@ -182,8 +179,8 @@ export function Hero() {
                   <div className="hero-scroll absolute inset-x-0 -top-[6%] -bottom-[6%]">
                     <div className="hero-zoom absolute inset-0">
                       <Image
-                        src={heroImage}
-                        alt="Готова вітальня в теплих тонах після ремонту Domus"
+                        src={site.heroImage}
+                        alt={t.alt}
                         fill
                         preload
                         sizes="(min-width: 1024px) 48vw, 100vw"
@@ -215,7 +212,7 @@ export function Hero() {
                     transition={{ duration: 0.4 }}
                     className="eyebrow text-[10px] text-graphite"
                   >
-                    {done ? "Здано за 74 дні" : "Креслення · 64 м²"}
+                    {done ? t.done : t.plan}
                   </motion.span>
                 </AnimatePresence>
               </div>
@@ -230,8 +227,8 @@ export function Hero() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   className="glass absolute top-4 right-4 grid h-10 w-10 place-items-center rounded-full text-graphite"
-                  aria-label="Повторити анімацію креслення"
-                  data-cursor="Ще раз"
+                  aria-label={t.replay}
+                  data-cursor={t.replayCursor}
                 >
                   <Replay width={16} height={16} />
                 </motion.button>
@@ -241,13 +238,13 @@ export function Hero() {
             <motion.div style={{ x: chipX, y: chipY }} className="absolute inset-x-4 bottom-4">
               <div className="hero-chip glass grid grid-cols-2 gap-4 rounded-2xl p-4 sm:p-5" style={{ opacity: 0 }}>
                 <div>
-                  <p className="eyebrow text-[9px] text-stone">Кошторис у договорі</p>
-                  <p className="mt-1.5 font-serif text-2xl leading-none sm:text-[1.7rem]">1 248 000 ₴</p>
+                  <p className="eyebrow text-[9px] text-stone">{t.estimate}</p>
+                  <p className="mt-1.5 font-serif text-2xl leading-none sm:text-[1.7rem]">{t.sum}</p>
                 </div>
                 <div className="border-l hairline pl-4">
-                  <p className="eyebrow text-[9px] text-stone">Підсумок після здачі</p>
+                  <p className="eyebrow text-[9px] text-stone">{t.final}</p>
                   <p className="mt-1.5 flex items-center gap-2 font-serif text-2xl leading-none sm:text-[1.7rem]">
-                    1 248 000 ₴
+                    {t.sum}
                     <span className="grid h-5 w-5 place-items-center rounded-full bg-terracotta text-paper">
                       <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden>
                         <path d="m2.5 6.2 2.2 2.2 4.8-4.8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -264,7 +261,7 @@ export function Hero() {
       </div>
 
       <div aria-hidden className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 lg:flex">
-        <span className="eyebrow text-[10px] text-stone">Гортайте</span>
+        <span className="eyebrow text-[10px] text-stone">{t.scroll}</span>
         <span className="relative block h-10 w-px overflow-hidden bg-graphite/15">
           <span className="absolute inset-x-0 top-0 h-1/2 animate-[scroll-cue_2.4s_var(--ease-soft)_infinite] bg-terracotta" />
         </span>

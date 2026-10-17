@@ -3,6 +3,7 @@
 import { animate, useInView } from "motion/react";
 import { useEffect, useRef } from "react";
 import { formatNumber } from "@/lib/format";
+import { useI18n } from "@/components/providers/I18n";
 
 type Props = {
   to: number;
@@ -13,12 +14,14 @@ type Props = {
   className?: string;
 };
 
-const fmt = (v: number, decimals: number) =>
-  decimals ? v.toFixed(decimals).replace(".", ",") : formatNumber(v);
+const fmtIn = (locale: string) => (v: number, decimals: number) =>
+  decimals ? v.toFixed(decimals).replace(".", locale.startsWith("uk") ? "," : ".") : formatNumber(v, locale);
 
 /** Число, которое «накручивается» при появлении в зоне видимости */
 export function Counter({ to, decimals = 0, duration = 2.2, prefix = "", suffix = "", className }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
+  const locale = useI18n().t.locale;
+  const fmt = fmtIn(locale);
   const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
 
   useEffect(() => {
@@ -33,7 +36,7 @@ export function Counter({ to, decimals = 0, duration = 2.2, prefix = "", suffix 
       },
     });
     return () => controls.stop();
-  }, [inView, to, decimals, duration, prefix, suffix]);
+  }, [inView, to, decimals, duration, prefix, suffix, locale]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <span className={className}>

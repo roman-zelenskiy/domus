@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import { stats, unsplash } from "@/content/site";
+import { stats, unsplash } from "@/content/site.uk";
+import { useI18n } from "@/components/providers/I18n";
 import { Counter } from "@/components/ui/Counter";
 import { RevealText } from "@/components/ui/RevealText";
 import { EASE, Stagger, StaggerItem } from "@/components/ui/Reveal";
@@ -10,25 +11,21 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { Star } from "@/components/ui/Icons";
 
-const crew = [
-  { role: "Маляри-штукатури", n: 11 },
-  { role: "Плиточники", n: 9 },
-  { role: "Монтажники ГКЛ", n: 8 },
-  { role: "Електрики", n: 6 },
-  { role: "Сантехніки", n: 5 },
-  { role: "Столяри", n: 3 },
-];
+const crewSize = [11, 9, 8, 6, 5, 3];
 
 const tile = "h-full rounded-[1.75rem] p-6 md:p-8";
 const label = "eyebrow text-[10px]";
 
 export function Stats() {
+  const { t: ui } = useI18n();
+  const t = ui.stats;
+  const crew = t.crew.map((role, i) => ({ role, n: crewSize[i] }));
   return (
     <section id="numbers" aria-labelledby="numbers-title" className="relative py-28 md:py-40">
       <div className="container-x">
         <div className="max-w-3xl">
-          <SectionLabel index="06">Цифри</SectionLabel>
-          <RevealText as="h2" text={"Цифри, за які\nми *відповідаємо*"} className="h2 mt-8" />
+          <SectionLabel index="06">{t.label}</SectionLabel>
+          <RevealText as="h2" text={t.title} className="h2 mt-8" />
         </div>
 
         <Stagger className="mt-16 grid auto-rows-[minmax(190px,auto)] grid-cols-2 gap-3 md:mt-20 md:gap-4 lg:grid-cols-4" stagger={0.08}>
@@ -43,14 +40,14 @@ export function Stats() {
                 className="-z-10 object-cover opacity-45 transition-transform duration-[1.6s] ease-[var(--ease-premium)] group-hover:scale-105"
               />
               <div className="absolute inset-0 -z-10 bg-gradient-to-t from-graphite via-graphite/60 to-graphite/20" />
-              <p className={`${label} text-cream/60`}>Здано під ключ з 2018 року</p>
+              <p className={`${label} text-cream/60`}>{t.since}</p>
               <div>
                 <p className="font-serif text-[clamp(6rem,14vw,13rem)] leading-[0.82] tracking-[-0.03em]">
                   <Counter to={stats.objects} />
                   <span className="text-terracotta-light">+</span>
                 </p>
                 <p className="mt-4 max-w-sm text-cream/70">
-                  квартир у Києві — від однокімнатних на Позняках до пентхаусів на Печерську.
+                  {t.objects}
                 </p>
               </div>
             </TiltCard>
@@ -60,7 +57,7 @@ export function Stats() {
           <StaggerItem>
             <TiltCard className={`${tile} flex flex-col justify-between border border-graphite/10 bg-paper`}>
               <div className="flex items-start justify-between">
-                <p className={`${label} text-stone`}>Точно в термін</p>
+                <p className={`${label} text-stone`}>{t.onTime}</p>
                 <svg viewBox="0 0 44 44" className="h-11 w-11 -rotate-90" aria-hidden>
                   <circle cx="22" cy="22" r="19" fill="none" stroke="currentColor" strokeOpacity=".12" strokeWidth="3" />
                   <motion.circle
@@ -74,7 +71,7 @@ export function Stats() {
               </div>
               <div>
                 <p className="font-serif text-7xl leading-none"><Counter to={stats.onTime} suffix="%" /></p>
-                <p className="mt-2 text-sm text-stone">об’єктів здано в дату з договору</p>
+                <p className="mt-2 text-sm text-stone">{t.onTimeText}</p>
               </div>
             </TiltCard>
           </StaggerItem>
@@ -82,10 +79,10 @@ export function Stats() {
           {/* 3 года гарантии */}
           <StaggerItem>
             <TiltCard glow="rgb(255 255 255 / 0.18)" className={`${tile} on-dark flex flex-col justify-between bg-terracotta text-paper`}>
-              <p className={`${label} text-paper/90`}>Гарантія</p>
+              <p className={`${label} text-paper/90`}>{t.warranty}</p>
               <div>
-                <p className="font-serif text-7xl leading-none"><Counter to={stats.warranty} /> <span className="text-4xl">роки</span></p>
-                <p className="mt-2 text-sm text-paper">на всі роботи — прописана в договорі</p>
+                <p className="font-serif text-7xl leading-none"><Counter to={stats.warranty} /> <span className="text-4xl">{t.years3}</span></p>
+                <p className="mt-2 text-sm text-paper">{t.warrantyText}</p>
               </div>
             </TiltCard>
           </StaggerItem>
@@ -93,10 +90,10 @@ export function Stats() {
           {/* 0 ₴ доплат */}
           <StaggerItem>
             <TiltCard className={`${tile} on-dark flex flex-col justify-between bg-graphite-2 text-cream`}>
-              <p className={`${label} text-cream/60`}>Доплати понад кошторис</p>
+              <p className={`${label} text-cream/60`}>{t.extra}</p>
               <div>
-                <p className="font-serif text-7xl leading-none">0 <span className="text-terracotta-light">₴</span></p>
-                <p className="mt-2 text-sm text-cream/65">з 2021 року, коли ми перейшли на фіксовані кошториси</p>
+                <p className="font-serif text-7xl leading-none">0 <span className="text-terracotta-light">{ui.cur}</span></p>
+                <p className="mt-2 text-sm text-cream/65">{t.extraText}</p>
               </div>
             </TiltCard>
           </StaggerItem>
@@ -106,13 +103,13 @@ export function Stats() {
             <TiltCard className={`${tile} flex flex-col justify-between border border-graphite/10 bg-paper`}>
               <div className="flex items-center justify-between">
                 <p className={`${label} text-stone`}>Google Maps</p>
-                <div className="flex text-terracotta" role="img" aria-label="5 зірок">
+                <div className="flex text-terracotta" role="img" aria-label={t.stars}>
                   {Array.from({ length: 5 }, (_, i) => <Star key={i} width={14} height={14} />)}
                 </div>
               </div>
               <div>
                 <p className="font-serif text-7xl leading-none"><Counter to={stats.rating} decimals={1} /></p>
-                <p className="mt-2 text-sm text-stone">середня оцінка за {stats.reviews} відгуками</p>
+                <p className="mt-2 text-sm text-stone">{t.rating(stats.reviews)}</p>
               </div>
             </TiltCard>
           </StaggerItem>
@@ -121,9 +118,9 @@ export function Stats() {
           <StaggerItem className="col-span-2">
             <TiltCard className={`${tile} grid gap-6 bg-sand sm:grid-cols-[auto_1fr] sm:items-end sm:gap-10`}>
               <div>
-                <p className={`${label} text-stone`}>Власні майстри</p>
+                <p className={`${label} text-stone`}>{t.masters}</p>
                 <p className="mt-4 font-serif text-7xl leading-none md:text-8xl"><Counter to={stats.masters} /></p>
-                <p className="mt-2 max-w-[13rem] text-sm text-stone">фахівці в штаті — без випадкових субпідрядників</p>
+                <p className="mt-2 max-w-[13rem] text-sm text-stone">{t.mastersText}</p>
               </div>
               <ul className="space-y-2.5">
                 {crew.map((c, i) => (
@@ -148,10 +145,10 @@ export function Stats() {
           {/* 8 лет */}
           <StaggerItem>
             <TiltCard className={`${tile} flex flex-col justify-between border border-graphite/10 bg-paper`}>
-              <p className={`${label} text-stone`}>На ринку</p>
+              <p className={`${label} text-stone`}>{t.market}</p>
               <div>
-                <p className="font-serif text-7xl leading-none"><Counter to={stats.years} /> <span className="text-4xl">років</span></p>
-                <p className="mt-2 text-sm text-stone">працюємо лише в Києві та передмісті</p>
+                <p className="font-serif text-7xl leading-none"><Counter to={stats.years} /> <span className="text-4xl">{t.years8}</span></p>
+                <p className="mt-2 text-sm text-stone">{t.marketText}</p>
               </div>
             </TiltCard>
           </StaggerItem>
@@ -160,10 +157,10 @@ export function Stats() {
           <StaggerItem>
             <TiltCard className={`${tile} relative flex flex-col justify-between border border-graphite/10 bg-paper`}>
               <div aria-hidden className="blueprint-grid absolute inset-0 -z-10 opacity-80" />
-              <p className={`${label} text-stone`}>Технагляд</p>
+              <p className={`${label} text-stone`}>{t.supervision}</p>
               <div>
                 <p className="font-serif text-7xl leading-none"><Counter to={stats.checklist} /></p>
-                <p className="mt-2 text-sm text-stone">пунктів у чек-листі приймання кожного етапу</p>
+                <p className="mt-2 text-sm text-stone">{t.checklist}</p>
               </div>
             </TiltCard>
           </StaggerItem>

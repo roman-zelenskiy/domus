@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { formatNumber } from "@/lib/format";
+import { useI18n } from "@/components/providers/I18n";
 
 const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -26,10 +27,11 @@ function Digit({ value }: { value: number }) {
 
 /** Сумма, цифры которой прокручиваются по разрядам, как в механическом счётчике */
 export function Odometer({ value, className = "" }: { value: number; className?: string }) {
-  const chars = formatNumber(value).split("");
+  const locale = useI18n().t.locale;
+  const chars = formatNumber(value, locale).split("");
   return (
     <span className={`inline-flex items-baseline [font-feature-settings:'lnum','tnum'] ${className}`}>
-      <span className="sr-only">{formatNumber(value)}</span>
+      <span className="sr-only">{formatNumber(value, locale)}</span>
       <span aria-hidden className="inline-flex">
         {chars.map((c, i) => {
           // ключ считаем справа, чтобы разряды сохраняли идентичность при смене длины числа
@@ -37,7 +39,7 @@ export function Odometer({ value, className = "" }: { value: number; className?:
           return /\d/.test(c) ? (
             <Digit key={`d${key}`} value={Number(c)} />
           ) : (
-            <span key={`s${key}`} className="inline-block w-[0.22em]" />
+            <span key={`s${key}`} className="inline-block w-[0.22em]">{c === "," ? c : null}</span>
           );
         })}
       </span>

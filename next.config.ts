@@ -6,6 +6,8 @@ const basePath = isPages ? process.env.PAGES_BASE_PATH || "" : "";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  // два кореневі layout (/[lang] і корінь вибору мови) → одна глобальна 404
+  experimental: { globalNotFound: true },
   ...(isPages && { output: "export", trailingSlash: true, basePath }),
   images: {
     formats: ["image/avif", "image/webp"],

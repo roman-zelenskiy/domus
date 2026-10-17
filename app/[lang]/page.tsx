@@ -13,8 +13,10 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { MobileCta } from "@/components/sections/MobileCta";
 import { buildJsonLd } from "@/lib/schema";
+import { getI18n } from "@/lib/i18n-server";
 
-export default function Home() {
+export default async function Home() {
+  const dict = await getI18n();
   return (
     <>
       <Header />
@@ -33,7 +35,7 @@ export default function Home() {
       </main>
       <Footer />
       <MobileCta />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(dict)) }} />
     </>
   );
 }

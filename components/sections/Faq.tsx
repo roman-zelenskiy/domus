@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useId, useState } from "react";
-import { company, faq } from "@/content/site";
+import { useI18n } from "@/components/providers/I18n";
 import { RevealText } from "@/components/ui/RevealText";
 import { EASE, Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -11,19 +11,22 @@ import { Telegram, Viber } from "@/components/ui/Icons";
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
   const uid = useId();
+  const { site, t: ui } = useI18n();
+  const { company, faq } = site;
+  const t = ui.faq;
 
   return (
     <section id="faq" aria-labelledby="faq-title" className="relative bg-sand/45 py-28 md:py-40">
-      <div className="container-x grid gap-14 lg:grid-cols-12">
+      <div className="container-x grid grid-cols-1 gap-14 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
-            <SectionLabel index="09">Питання</SectionLabel>
-            <RevealText as="h2" text={"Часті\n*питання*"} className="h2 mt-8" />
+            <SectionLabel index="09">{t.label}</SectionLabel>
+            <RevealText as="h2" text={t.title} className="h2 mt-8" />
             <Reveal delay={0.15}>
               <div className="mt-10 max-w-sm rounded-[1.75rem] border border-graphite/10 bg-paper p-7">
-                <p className="font-serif text-2xl leading-tight">Не знайшли відповіді?</p>
+                <p className="font-serif text-2xl leading-tight">{t.none}</p>
                 <p className="mt-2 text-sm leading-relaxed text-stone">
-                  Напишіть менеджеру — відповідаємо протягом 15 хвилин, {company.hours.toLowerCase()}.
+                  {t.write(company.hours)}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   <a href={company.messengers.telegram} className="inline-flex items-center gap-2 rounded-full bg-graphite px-4 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-terracotta">

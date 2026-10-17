@@ -1,3 +1,7 @@
+"use client";
+
+import { useI18n } from "@/components/providers/I18n";
+
 /**
  * План двухкомнатной квартиры 64 м² для анимации в hero.
  * Все линии используют pathLength=1 — GSAP прорисовывает их через stroke-dashoffset.
@@ -6,8 +10,9 @@
 const line = { pathLength: 1, strokeDasharray: 1, strokeDashoffset: 1, fill: "none", vectorEffect: "non-scaling-stroke" as const };
 
 export function FloorPlan({ className = "" }: { className?: string }) {
+  const t = useI18n().t.plan;
   return (
-    <svg viewBox="0 0 400 500" className={className} role="img" aria-label="План квартири 64 м²: спальня, вітальня, кухня та санвузол">
+    <svg viewBox="0 0 400 500" className={className} role="img" aria-label={t.aria}>
       <defs>
         <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <line x1="0" y1="0" x2="0" y2="7" stroke="var(--color-terracotta)" strokeWidth="1.2" strokeOpacity=".22" />
@@ -98,23 +103,23 @@ export function FloorPlan({ className = "" }: { className?: string }) {
       {/* Подписи помещений */}
       <g className="font-mono" fill="currentColor" fontSize="8" letterSpacing=".12em">
         <g className="bp-label" style={{ opacity: 0 }}>
-          <text x="58" y="218">СПАЛЬНЯ</text>
-          <text x="58" y="230" fill="var(--color-terracotta)">14,2 м²</text>
+          <text x="58" y="218">{t.bedroom}</text>
+          <text x="58" y="230" fill="var(--color-terracotta)">{t.m2("14,2")}</text>
         </g>
         <g className="bp-label" style={{ opacity: 0 }}>
-          <text x="262" y="84">ВІТАЛЬНЯ</text>
-          <text x="262" y="96" fill="var(--color-terracotta)">19,6 м²</text>
+          <text x="262" y="84">{t.living}</text>
+          <text x="262" y="96" fill="var(--color-terracotta)">{t.m2("19,6")}</text>
         </g>
         <g className="bp-label" style={{ opacity: 0 }}>
-          <text x="104" y="336">С/В</text>
-          <text x="104" y="348" fill="var(--color-terracotta)">6,1 м²</text>
+          <text x="104" y="336">{t.bath}</text>
+          <text x="104" y="348" fill="var(--color-terracotta)">{t.m2("6,1")}</text>
         </g>
         <g className="bp-label" style={{ opacity: 0 }}>
-          <text x="204" y="410">КУХНЯ</text>
-          <text x="204" y="422" fill="var(--color-terracotta)">17,4 м²</text>
+          <text x="204" y="410">{t.kitchen}</text>
+          <text x="204" y="422" fill="var(--color-terracotta)">{t.m2("17,4")}</text>
         </g>
         <g className="bp-label" style={{ opacity: 0 }}>
-          <text x="320" y="462" textAnchor="middle" fill="var(--color-stone)">ВХІД</text>
+          <text x="320" y="462" textAnchor="middle" fill="var(--color-stone)">{t.entry}</text>
         </g>
       </g>
     </svg>

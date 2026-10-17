@@ -25,7 +25,7 @@ const Layer = ({ show, children }: { show: boolean; children: React.ReactNode })
 );
 
 /** SVG-версия комнаты: для мобильных, reduced-motion и слабых устройств */
-export function RoomIso({ f, className = "" }: { f: RoomFeatures; className?: string }) {
+export function RoomIso({ f, label, className = "" }: { f: RoomFeatures; label: string; className?: string }) {
   const W = 6;
   const D = 5;
   const H = 3;
@@ -34,7 +34,7 @@ export function RoomIso({ f, className = "" }: { f: RoomFeatures; className?: st
   const floor = palette.floor[f.level];
 
   return (
-    <svg viewBox="0 0 360 320" className={className} role="img" aria-label="Схематична візуалізація кімнати з обраним оздобленням">
+    <svg viewBox="0 0 360 320" className={className} role="img" aria-label={label}>
       {/* стены: задняя (y=0) и левая (x=0) */}
       <polygon points={poly([0, 0, 0], [W, 0, 0], [W, 0, H], [0, 0, H])} fill={wallBack} style={{ transition: "fill .8s" }} />
       <polygon points={poly([0, 0, 0], [0, D, 0], [0, D, H], [0, 0, H])} fill={wallSide} style={{ transition: "fill .8s" }} />

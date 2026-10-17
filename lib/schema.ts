@@ -1,9 +1,12 @@
-import { company, faq, packages, reviews, seo, stats } from "@/content/site";
+import type { Dict } from "./i18n";
 import { siteUrl } from "./site-url";
 
 /** Структурированные данные schema.org (JSON-LD) для главной страницы */
-export function buildJsonLd() {
+export function buildJsonLd({ lang, site, t }: Dict) {
+  const { company, faq, packages, reviews, seo, stats } = site;
+  const s = t.schema;
   const { description } = seo;
+  const home = `${siteUrl}/${lang}/`;
   const business = `${siteUrl}/#business`;
   const website = `${siteUrl}/#website`;
 
@@ -15,16 +18,16 @@ export function buildJsonLd() {
         "@id": website,
         url: `${siteUrl}/`,
         name: "Domus",
-        inLanguage: "uk-UA",
+        inLanguage: s.inLanguage,
         publisher: { "@id": business },
       },
       {
         "@type": "WebPage",
-        "@id": `${siteUrl}/#webpage`,
-        url: `${siteUrl}/`,
-        name: "Ремонт квартир під ключ у Києві",
+        "@id": `${home}#webpage`,
+        url: home,
+        name: s.pageName,
         description,
-        inLanguage: "uk-UA",
+        inLanguage: s.inLanguage,
         isPartOf: { "@id": website },
         about: { "@id": business },
         primaryImageOfPage: `${siteUrl}/opengraph-image`,
@@ -40,19 +43,19 @@ export function buildJsonLd() {
         telephone: company.phone,
         email: company.email,
         foundingDate: "2018",
-        priceRange: "від 3 200 ₴/м²",
+        priceRange: s.priceRange,
         currenciesAccepted: "UAH",
-        paymentAccepted: "Готівка, банківський переказ",
+        paymentAccepted: s.payment,
         address: {
           "@type": "PostalAddress",
           streetAddress: company.address,
-          addressLocality: "Київ",
+          addressLocality: s.city,
           postalCode: "03150",
           addressCountry: "UA",
         },
         geo: { "@type": "GeoCoordinates", latitude: 50.4325, longitude: 30.516 },
         hasMap: company.mapsUrl,
-        areaServed: { "@type": "City", name: "Київ" },
+        areaServed: { "@type": "City", name: s.city },
         openingHoursSpecification: {
           "@type": "OpeningHoursSpecification",
           dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -74,20 +77,20 @@ export function buildJsonLd() {
         })),
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: "Ремонт квартир під ключ",
+          name: s.catalog,
           itemListElement: packages.map((p) => ({
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: `${p.name} ремонт квартири`,
-              description: `${p.tagline}. Термін: ${p.term}. Входить: ${p.includes.join(", ")}.`,
-              areaServed: "Київ",
+              name: s.service(p.name),
+              description: s.serviceText(p.tagline, p.term, p.includes.join(", ")),
+              areaServed: s.city,
             },
             priceSpecification: {
               "@type": "UnitPriceSpecification",
               price: p.price,
               priceCurrency: "UAH",
-              unitText: "м²",
+              unitText: s.unit,
               referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MTK" },
             },
           })),

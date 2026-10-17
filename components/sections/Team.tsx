@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { aboutImage, team } from "@/content/site";
+import { useI18n } from "@/components/providers/I18n";
 import { RevealText } from "@/components/ui/RevealText";
 import { EASE, Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -30,41 +30,37 @@ function Signature() {
 
 export function Team() {
   const imgWrap = useRef<HTMLDivElement>(null);
+  const { site, t: ui } = useI18n();
+  const { aboutImage, team } = site;
+  const t = ui.team;
   const { scrollYProgress } = useScroll({ target: imgWrap, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   return (
     <section id="about" aria-labelledby="about-title" className="relative py-28 md:py-40">
       <div className="container-x">
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
-            <SectionLabel index="08">Про компанію</SectionLabel>
-            <RevealText as="h2" text={"Domus\nлатиною —\n*«дім»*"} className="h2 mt-8" />
+            <SectionLabel index="08">{t.label}</SectionLabel>
+            <RevealText as="h2" text={t.title} className="h2 mt-8" />
             <Reveal delay={0.1}>
               <div className="mt-8 max-w-md space-y-5 text-lg leading-relaxed text-stone">
-                <p>
-                  Ми починали у 2018 році з бригади з п’яти людей і одного правила: кошторис, який підписав
-                  клієнт, не змінюється. Сьогодні в нас 42 майстри в штаті, власний проєктний відділ і технагляд.
-                </p>
-                <p>
-                  Ми не беремо понад 14 об’єктів одночасно — так кожен проєкт має увагу інженера,
-                  а не «виконроба на п’ять квартир».
-                </p>
+                <p>{t.p1}</p>
+                <p>{t.p2}</p>
               </div>
             </Reveal>
 
             <Reveal delay={0.2}>
               <figure className="mt-12 border-l-2 border-terracotta pl-6">
                 <blockquote className="font-serif text-[1.65rem] leading-[1.2] italic">
-                  «Ремонт — це не про плитку. Це про те, щоб людині було спокійно всі три місяці, поки ми
-                  працюємо».
+                  {t.quote}
                 </blockquote>
                 <figcaption className="mt-5 flex items-center gap-4">
                   <Signature />
                   <span className="text-sm text-stone">
-                    Андрій Коваленко,
+                    {t.author}
                     <br />
-                    засновник
+                    {t.authorRole}
                   </span>
                 </figcaption>
               </figure>
@@ -77,7 +73,7 @@ export function Team() {
                 <motion.div style={{ y }} className="absolute -inset-y-[10%] inset-x-0">
                   <Image
                     src={aboutImage}
-                    alt="Інженер Domus розмічає креслення планування з лінійкою та олівцем"
+                    alt={t.alt}
                     fill
                     sizes="(min-width: 1024px) 45vw, 100vw"
                     className="object-cover"
@@ -85,8 +81,8 @@ export function Team() {
                 </motion.div>
                 <div className="glass absolute right-4 bottom-4 left-4 flex items-center justify-between gap-4 rounded-2xl p-5 sm:right-auto sm:max-w-xs">
                   <div>
-                    <p className="eyebrow text-[10px] text-stone">Проєктний відділ</p>
-                    <p className="mt-1.5 font-serif text-2xl leading-tight">6 інженерів і 3 дизайнери</p>
+                    <p className="eyebrow text-[10px] text-stone">{t.dept}</p>
+                    <p className="mt-1.5 font-serif text-2xl leading-tight">{t.deptText}</p>
                   </div>
                 </div>
               </div>

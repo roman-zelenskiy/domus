@@ -37,6 +37,7 @@ jobs:
 
       - name: Type-check and lint
         run: |
+          npx next typegen   # типи LayoutProps і next/root-params
           npx tsc --noEmit
           npm run lint
 

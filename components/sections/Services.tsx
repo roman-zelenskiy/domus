@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { packages, type PackageId } from "@/content/site";
+import type { PackageId } from "@/content/site.uk";
+import { useI18n } from "@/components/providers/I18n";
 import { calcStore } from "@/lib/calculator";
 import { formatNumber } from "@/lib/format";
 import { useScrollTo } from "@/components/providers/SmoothScroll";
@@ -13,6 +14,9 @@ import { ArrowRight, Check } from "@/components/ui/Icons";
 
 export function Services() {
   const scrollTo = useScrollTo();
+  const { site, t: ui } = useI18n();
+  const { packages } = site;
+  const t = ui.services;
 
   const choose = (id: PackageId) => {
     calcStore.set({ type: id });
@@ -23,20 +27,19 @@ export function Services() {
     <section id="services" aria-labelledby="services-title" className="relative overflow-hidden bg-sand/45 py-28 md:py-40">
       <div aria-hidden className="blueprint-grid pointer-events-none absolute inset-0 opacity-60 [mask-image:linear-gradient(to_bottom,black,transparent_60%)]" />
       <div className="container-x relative">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <SectionLabel index="02">Послуги та пакети</SectionLabel>
-            <RevealText as="h2" text={"Три пакети —\n*один* прозорий кошторис"} className="h2 mt-8" />
+            <SectionLabel index="02">{t.label}</SectionLabel>
+            <RevealText as="h2" text={t.title} className="h2 mt-8" />
           </div>
           <Reveal className="lg:col-span-4 lg:col-start-9" delay={0.15}>
             <p className="text-lg leading-relaxed text-stone">
-              Ціни вказано за м², вони вже включають роботи й чорнові матеріали. Чистові — на ваш вибір або
-              в нашій комплектації.
+              {t.lead}
             </p>
           </Reveal>
         </div>
 
-        <Stagger className="mt-16 grid gap-5 md:mt-24 lg:grid-cols-12 lg:items-start" stagger={0.12}>
+        <Stagger className="mt-16 grid grid-cols-1 gap-5 md:mt-24 lg:grid-cols-12 lg:items-start" stagger={0.12}>
           {packages.map((p, i) => {
             const dark = !!p.featured;
             return (
@@ -60,7 +63,7 @@ export function Services() {
                     </span>
                     {dark && (
                       <span className="eyebrow absolute top-3 right-3 rounded-full bg-terracotta px-3 py-1.5 text-[10px] text-paper">
-                        Обирають 64%
+                        {t.popular}
                       </span>
                     )}
                   </div>
@@ -73,9 +76,9 @@ export function Services() {
                     <p className={`mt-3 text-[15px] leading-relaxed ${dark ? "text-cream/70" : "text-stone"}`}>{p.tagline}</p>
 
                     <p className="mt-7 flex items-baseline gap-2">
-                      <span className={`eyebrow ${dark ? "text-cream/60" : "text-stone"}`}>від</span>
-                      <span className="font-serif text-5xl leading-none">{formatNumber(p.price)}</span>
-                      <span className={`text-sm ${dark ? "text-cream/70" : "text-stone"}`}>₴/м²</span>
+                      <span className={`eyebrow ${dark ? "text-cream/60" : "text-stone"}`}>{t.from}</span>
+                      <span className="font-serif text-5xl leading-none">{formatNumber(p.price, ui.locale)}</span>
+                      <span className={`text-sm ${dark ? "text-cream/70" : "text-stone"}`}>{t.perM2}</span>
                     </p>
 
                     <ul className={`mt-7 space-y-3 border-t pt-6 text-[15px] ${dark ? "border-cream/10" : "hairline"}`}>
@@ -96,7 +99,7 @@ export function Services() {
                           : "border-graphite/15 hover:border-graphite hover:bg-graphite hover:text-paper"
                       }`}
                     >
-                      Розрахувати «{p.name.toLowerCase()}»
+                      {t.calc(p.name)}
                       <ArrowRight className="transition-transform duration-500 group-hover/btn:translate-x-1" />
                     </button>
                   </div>

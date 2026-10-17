@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
-import { steps } from "@/content/site";
+import { useI18n } from "@/components/providers/I18n";
 import { gsap, ScrollTrigger, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { RevealText } from "@/components/ui/RevealText";
 import { Reveal } from "@/components/ui/Reveal";
@@ -26,6 +26,9 @@ function Level() {
 export function Process() {
   const root = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const { site, t: ui } = useI18n();
+  const { steps } = site;
+  const t = ui.process;
 
   useGSAP(
     () => {
@@ -93,17 +96,16 @@ export function Process() {
       <div aria-hidden className="blueprint-grid-dark pointer-events-none absolute inset-0" />
       <div aria-hidden className="pointer-events-none absolute top-1/3 -right-40 h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle,rgb(169_78_52/0.25),transparent_65%)]" />
 
-      <div className="container-x relative grid gap-16 lg:grid-cols-12">
+      <div className="container-x relative grid grid-cols-1 gap-16 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div>
             <SectionLabel index="04" dark>
-              Етапи роботи
+              {t.label}
             </SectionLabel>
-            <RevealText as="h2" text={"Шість етапів\nі *жодного*\nсюрпризу"} className="h2 mt-8" />
+            <RevealText as="h2" text={t.title} className="h2 mt-8" />
             <Reveal delay={0.15}>
               <p className="mt-8 max-w-md text-lg leading-relaxed text-cream/65">
-                Кожен етап має термін, відповідального та акт приймання. Ви завжди знаєте, що відбувається на
-                об’єкті сьогодні й що буде завтра.
+                {t.lead}
               </p>
             </Reveal>
           </div>
@@ -125,7 +127,7 @@ export function Process() {
                 </AnimatePresence>
               </div>
               <div className="pb-4">
-                <p className="eyebrow text-cream/60">з 06</p>
+                <p className="eyebrow text-cream/60">{t.of}</p>
                 <p className="mt-2 max-w-[12rem] font-serif text-2xl leading-tight">{steps[active].title}</p>
               </div>
             </div>
@@ -154,7 +156,7 @@ export function Process() {
 
                 <article className="brick glass-dark relative rounded-[1.5rem] p-7 md:p-9">
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <span className="eyebrow text-terracotta-light">Етап 0{i + 1}</span>
+                    <span className="eyebrow text-terracotta-light">{t.stage(`0${i + 1}`)}</span>
                     <span className="eyebrow rounded-full border border-cream/15 px-3 py-1.5 text-[10px] text-cream/70">
                       {s.duration}
                     </span>
